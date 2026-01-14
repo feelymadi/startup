@@ -41,7 +41,7 @@ I am going to use the required technologies in the following ways.
 - **React** - This is how the user will interact with my page, to rank and search for songs.
 - **Service** - Service will be how I store all of the rankings and charts. 
 - **DB/Login** - A database will store user accounts and rankings. Login lets users access their account and their rankings.
-- **WebSocket** - 
+- **WebSocket** - Using WebSocket will bring the site to life. It will allow for realtime updates to the weekly chart and will send notifications when new rankings are posted.
 
 ## 🚀 AWS deliverable
 
