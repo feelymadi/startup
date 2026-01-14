@@ -1,11 +1,11 @@
-# TuneChart
+# 🎼 TuneChart
 
 [My Notes](notes.md)
 
 In short what I plan to create is letterboxd but for music. I want a place where you can rank songs and it will have a leaderboard for the week based on peoples ranking.
 
 
-## 🚀 Specification Deliverable
+## 💿 Specification Deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
