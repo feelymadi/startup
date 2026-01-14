@@ -36,12 +36,12 @@ Do you ever feel stuck when you are listening to music? Do you ever want to fres
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - I will use html to structure my startup. It will layout all of the information that I want to display with relevant headers, links, and/or tables.
+- **CSS** - CSS will allow me to deliver this information in a pretty and readable way. This is where the style will come from.
+- **React** - This is how the user will interact with my page, to rank and search for songs.
+- **Service** - Service will be how I store all of the rankings and charts. 
+- **DB/Login** - A database will store user accounts and rankings. Login lets users access their account and their rankings.
+- **WebSocket** - 
 
 ## 🚀 AWS deliverable
 
