@@ -29,9 +29,11 @@ Do you ever feel stuck when you are listening to music? Do you ever want to fres
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Allow user to rank a song
+- Compile and update weekly chart based on users rankings
+
+> [!NOTE]
+> I feel there are many more features I could add but this is what I want to start with seeing as I am not very familiar with html or css
 
 ### Technologies
 
