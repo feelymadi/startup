@@ -10,18 +10,16 @@
 
 ## AWS
 
-My IP address is: 54.81.96.130
-Launching my AMI I initially put it on a private subnet. Even though it had a public IP address and the security group was right, I wasn't able to connect to it.
+My IP address is: 98.84.244.108
+This was such a struggle thb. I had to do it twice and it works now but I need to figure out how to delete one of my instances.
 
 ## Caddy
 
-No problems worked just like it said in the [instruction](https://github.com/webprogramming260/.github/blob/main/profile/webServers/https/https.md).
+The first time I tried it apparently had the wrong kind of IP address?? So I changed the elastic IP address and it magically worked.
 
 ## HTML
 
-This was easy. I was careful to use the correct structural elements such as header, footer, main, nav, and form. The links between the three views work great using the `a` element.
-
-The part I didn't like was the duplication of the header and footer code. This is messy, but it will get cleaned up when I get to React.
+I was worried about this but I think it will be easier then I anticipated. 
 
 ## CSS
 
