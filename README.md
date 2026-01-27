@@ -60,7 +60,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
       I had to learn a couple of new tags to use. I included tags for links, images, input, tables, and more.
 - [x] **Links** - I completed this part of the deliverable.
       I connected all of my pages using anchor (<a>) tags. The navigation menu links to each major page of the application, allowing users to move between the home page, ranking page, profile page, weekly chart, and about page.
-- [ ] **Text** - I completed this part of the deliverable.
+- [x] **Text** - I completed this part of the deliverable.
       This is most evident in my about page. I included meaningful textual content, such as headings, labels, and table headers which helps explain the purpose of each page and provides context interaction.
 - [x] **3rd party API placeholder** - I completed this part of the deliverable.
       I added placeholders in my HTML where third-party API data will eventually be displayed. This data is central to my startup because I will need to connect to an external music API to get all of my song data, such album cover, title, artist and maybe even a short clip.
