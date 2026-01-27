@@ -47,21 +47,25 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
+- [x] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
+It was difficult to figure out at first but I eventually figures it out. There is more information in my notes.md
 
 ## 🚀 HTML deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I completed this part of the deliverable.
+      I created separate HTML pages for each major component of my application, including a home page, a song ranking page, a profile page, a weekly chart page, and an about page. Each page represents a different part of the user experience and navigation flow of the site.
+- [x] **Proper HTML element usage** - I completed this part of the deliverable.
+      I had to learn a couple of new tags to use. I included tags for links, images, input, tables, and more.
+- [ ] **Links** - I completed this part of the deliverable.
+      
+- [ ] **Text** - I completed this part of the deliverable.
+- [ ] **3rd party API placeholder** - I completed this part of the deliverable.
+- [ ] **Images** - I completed this part of the deliverable.
+- [ ] **Login placeholder** - I completed this part of the deliverable.
+- [ ] **DB data placeholder** - I completed this part of the deliverable.
+- [ ] **WebSocket placeholder** - I completed this part of the deliverable.
 
 ## 🚀 CSS deliverable
 
