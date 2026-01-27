@@ -58,14 +58,20 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
       I created separate HTML pages for each major component of my application, including a home page, a song ranking page, a profile page, a weekly chart page, and an about page. Each page represents a different part of the user experience and navigation flow of the site.
 - [x] **Proper HTML element usage** - I completed this part of the deliverable.
       I had to learn a couple of new tags to use. I included tags for links, images, input, tables, and more.
-- [ ] **Links** - I completed this part of the deliverable.
-      
+- [x] **Links** - I completed this part of the deliverable.
+      I connected all of my pages using anchor (<a>) tags. The navigation menu links to each major page of the application, allowing users to move between the home page, ranking page, profile page, weekly chart, and about page.
 - [ ] **Text** - I completed this part of the deliverable.
-- [ ] **3rd party API placeholder** - I completed this part of the deliverable.
-- [ ] **Images** - I completed this part of the deliverable.
-- [ ] **Login placeholder** - I completed this part of the deliverable.
-- [ ] **DB data placeholder** - I completed this part of the deliverable.
-- [ ] **WebSocket placeholder** - I completed this part of the deliverable.
+      This is most evident in my about page. I included meaningful textual content, such as headings, labels, and table headers which helps explain the purpose of each page and provides context interaction.
+- [x] **3rd party API placeholder** - I completed this part of the deliverable.
+      I added placeholders in my HTML where third-party API data will eventually be displayed. This data is central to my startup because I will need to connect to an external music API to get all of my song data, such album cover, title, artist and maybe even a short clip.
+- [x] **Images** - I completed this part of the deliverable.
+      I added a place holder which will eventually change to display the album cover of specific songs
+- [x] **Login placeholder** - I completed this part of the deliverable.
+      On my home page there is a login placeholder.
+- [x] **DB data placeholder** - I completed this part of the deliverable.
+      On the charts page there is a placeholder for the weekly chart data.
+- [x] **WebSocket placeholder** - I completed this part of the deliverable.
+      I added a placeholder notification on the Weekly Chart Page which will notify when someone ranks a new song.
 
 ## 🚀 CSS deliverable
 
