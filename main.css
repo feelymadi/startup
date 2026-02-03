@@ -11,7 +11,7 @@ body {
 }
 
 main {
-  flex: 1;                 
+  flex: 1 0 auto;                
   gap: 1rem;
   display: flex;
   flex-direction: column;
@@ -23,4 +23,24 @@ main {
 
 footer {
   flex: 0 0 auto;
+  margin-top: auto;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+img{
+  max-width: 100%;
+  height: auto;
+}
+
+:root {
+  --bg-main: #fdf4e3;
+  --bg-nav: #feb21a;
+
+  --text-main: #000000;
+  --text-muted: #524f49;
+  --accent: #ed3f27;
 }
