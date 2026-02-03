@@ -3,6 +3,7 @@ body {
     display: flex;
     flex-direction: column;
     min-width: 375px;
+    background-color: var(--bg-main);
 }
 
 main {
@@ -17,8 +18,19 @@ main {
 }
 
 footer {
-    flex: 0 0 auto;
-    margin-top: auto;
+  flex: 0 0 auto;
+  margin-top: auto;
+  background-color: var(--bg-nav);
+  color: var(--text-muted);
+  padding: 0.75rem 1rem;
+}
+
+footer a {
+  color: var(--accent);
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
 
 html,
@@ -44,5 +56,13 @@ img {
 }
 
 .navbar {
-  background-color: var(--bg-nav);
+    background-color: var(--bg-nav);
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 600px;
 }
