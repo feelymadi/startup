@@ -1,15 +1,22 @@
-header {
-  flex: 0 80px;
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
-.navbar-brand {
-  padding-left: 0.3em;
-}
-
-menu .nav-item {
-  padding: 0 0.3em;
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-width: 375px;
 }
 
 main {
-  padding-top: 4rem;
+  flex: 1;                 
+  gap: 1rem;                
+  padding-top: 2rem;        
+  padding-bottom: 1rem;
+}
+
+footer {
+  flex: 0 0 auto;
 }
