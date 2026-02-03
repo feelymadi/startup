@@ -23,6 +23,11 @@ I was worried about this but I think it will be easier then I anticipated.
 
 ## CSS
 
+main.css 
+
+
+
+
 This took a couple hours to get it how I wanted. It was important to make it responsive and Bootstrap helped with that. It looks great on all kinds of screen sizes.
 
 Bootstrap seems a bit like magic. It styles things nicely, but is very opinionated. You either do, or you do not. There doesn't seem to be much in between.
