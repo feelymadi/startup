@@ -13,8 +13,9 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 56px;
+    padding-top: 75px;
     padding-bottom: 1rem;
+    background-color: var(--bg-main);
 }
 
 footer {
