@@ -4,7 +4,7 @@ form {
   margin: 0 auto;
 }
 
-.btn-search, .btn-submit:hover  {
+.btn-search, .btn-submit  {
     padding: 10px 24px;
     border-radius: 999px;
     font-family: "Comfortaa", sans-serif;
