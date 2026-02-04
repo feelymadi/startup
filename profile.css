@@ -12,6 +12,8 @@
     max-width: 900px;
     margin: 0 auto;
     width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
 }
 
 .rank-table tbody tr {
@@ -21,7 +23,7 @@
 }
 
 .rank-table td {
-    padding: 16px 20px;
+    padding: 10px 20px;
     color: white;
 }
 
@@ -33,4 +35,8 @@
 .rank-table td:last-child {
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
+}
+
+.rank-table tbody tr:hover {
+    transform: translateY(-2px);
 }
