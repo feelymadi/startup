@@ -76,3 +76,11 @@ p {
     font-family: "Comfortaa", sans-serif;
     font-weight: 300;
 }
+
+.btn-login,
+.btn-create {
+    padding: 10px 24px;
+    border-radius: 999px;
+    font-family: "Comfortaa", sans-serif;
+    font-weight: 600;
+}
