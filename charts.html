@@ -7,12 +7,12 @@
   <title>Charts</title>
   <link rel="icon" href="favicon.ico" />
 
-  <link rel="stylesheet" href="main.css" />
-  <link rel="stylesheet" href="charts.css" />
-
   <!-- Include bootstrap CSS framework -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="charts.css" />
 
   <!-- import font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,14 +67,12 @@
     <!-- song display -->
     <h1>Welcome to our Weekly Chart</h1>
     <h2>Top Song</h2>
-    <br>
     <!-- top song -->
     <h2><span id="topTitle">Cursed</span> : <span id="topArtist">Lord Huron</span></h2>
-    <br><img alt="albumPhoto" src="albumcoverexample.png" width="300" />
-    <hr>
+    <img alt="albumPhoto" src="albumcoverexample.png" width="300" class="album-cover" />
     <!-- chart -->
     <h2>This Weeks Chart</h2>
-    <table>
+    <table class="rank-table">
       <thead>
         <tr>
           <th>#</th>

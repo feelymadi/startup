@@ -1,0 +1,58 @@
+.album-cover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+}
+
+.album-cover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.rank-table {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.rank-table tbody tr {
+    background: var(--accent);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rank-table td {
+    padding: 10px 20px;
+    color: white;
+}
+
+.rank-table td:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.rank-table td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.rank-table tbody tr:hover {
+    transform: translateY(-2px);
+}
+
+.btn {
+    padding: 10px 24px;
+    border-radius: 999px;
+    font-family: "Comfortaa", sans-serif;
+    font-weight: 600;
+    transition: all 1s ease;
+    background-color: var(--accent);
+    color: white;
+}
+
+.btn:hover {
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+}
