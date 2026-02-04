@@ -56,3 +56,9 @@
     border: 2px solid var(--accent);
     color: var(--accent);
 }
+
+.notification {
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: center;
+}
