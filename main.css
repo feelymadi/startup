@@ -83,4 +83,27 @@ p {
     border-radius: 999px;
     font-family: "Comfortaa", sans-serif;
     font-weight: 600;
+    transition: all 1s ease;
+}
+
+.btn-login {
+    background-color: var(--accent);
+    color: white;
+}
+
+.btn-login:hover {
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+}
+
+.btn-create {
+    background-color: var(--accent);
+    color: white;
+}
+
+.btn-create:hover {
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
 }

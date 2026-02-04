@@ -28,6 +28,8 @@ day 1: okay first I focused on just getting everything to be the right kind of c
 day 2: format body, change font
 grid for vertical stack buttons, flex for hortz
 
+you have to load in the css file after bootstrap in your head *mind blown*
+
 ## React Part 1: Routing
 
 Setting up Vite and React was pretty simple. I had a bit of trouble because of conflicting CSS. This isn't as straight forward as you would find with Svelte or Vue, but I made it work in the end. If there was a ton of CSS it would be a real problem. It sure was nice to have the code structured in a more usable way.
