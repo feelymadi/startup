@@ -4,6 +4,7 @@ body {
     flex-direction: column;
     min-width: 375px;
     background-color: var(--bg-main);
+    font-family: "Comfortaa", sans-serif;
 }
 
 main {
@@ -19,19 +20,21 @@ main {
 }
 
 footer {
-  flex: 0 0 auto;
-  margin-top: auto;
-  background-color: var(--bg-nav);
-  color: var(--text-muted);
-  padding: 0.75rem 1rem;
+    flex: 0 0 auto;
+    margin-top: auto;
+    background-color: var(--bg-nav);
+    color: var(--text-muted);
+    padding: 0.75rem 1rem;
 }
 
 footer a {
-  color: var(--accent);
+    color: var(--accent);
+    font-family: "Comfortaa", sans-serif;
+    font-weight: 300;
 }
 
 footer a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 html,
@@ -58,12 +61,17 @@ img {
 
 .navbar {
     background-color: var(--bg-nav);
+    font-family: "Comfortaa", sans-serif;
+    font-weight: 300;
 }
 
-hr {
-  border: none;
-  height: 1px;
-  background-color: rgba(0, 0, 0, 0.15);
-  width: 100%;
-  max-width: 600px;
+
+h1 {
+    font-family: "Comfortaa", sans-serif;
+    font-weight: 700;
+}
+
+p {
+    font-family: "Comfortaa", sans-serif;
+    font-weight: 300;
 }
