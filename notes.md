@@ -30,6 +30,8 @@ grid for vertical stack buttons, flex for hortz
 
 you have to load in the css file after bootstrap in your head *mind blown*
 
+add class descriptor to override
+
 ## React Part 1: Routing
 
 Setting up Vite and React was pretty simple. I had a bit of trouble because of conflicting CSS. This isn't as straight forward as you would find with Svelte or Vue, but I made it work in the end. If there was a ton of CSS it would be a real problem. It sure was nice to have the code structured in a more usable way.
