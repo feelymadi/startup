@@ -31,10 +31,12 @@ footer a {
     color: var(--accent);
     font-family: "Comfortaa", sans-serif;
     font-weight: 300;
+    display: inline-block;
+    transition: transform 0.2s ease;
 }
 
 footer a:hover {
-    text-decoration: underline;
+    transform: scale(1.08);
 }
 
 html,
