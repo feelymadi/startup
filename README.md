@@ -77,17 +77,17 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **Visually appealing colors and layout. No overflowing elements.** - I did not complete this part of the deliverable.
+- [x] **Visually appealing colors and layout. No overflowing elements.** - I completed this part of the deliverable.
       I used :root to store the variables for my color palatte. I padding and centering for the layout.
-- [x] **Use of a CSS framework** - I did not complete this part of the deliverable.
+- [x] **Use of a CSS framework** - I completed this part of the deliverable.
       I used bootstrap for alot of styling.
-- [x] **All visual elements styled using CSS** - I did not complete this part of the deliverable.
+- [x] **All visual elements styled using CSS** - I completed this part of the deliverable.
       Everything everywhere on the site is styled using css, from header to footer.
-- [x] **Responsive to window resizing using flexbox and/or grid display** - I did not complete this part of the deliverable.
+- [x] **Responsive to window resizing using flexbox and/or grid display** - I completed this part of the deliverable.
       I used flex and grid elements to acheive this. I also put in a hamburger nav bar which took a long time.
-- [x] **Use of a imported font** - I did not complete this part of the deliverable.
+- [x] **Use of a imported font** - I completed this part of the deliverable.
       I imported a google font and made sure it was used everywhere. I even played around with width.
-- [x] **Use of different types of selectors including element, class, ID, and pseudo selectors** - I did not complete this part of the deliverable.
+- [x] **Use of different types of selectors including element, class, ID, and pseudo selectors** - I completed this part of the deliverable.
       I mostly used class and pseudo selectors but I added on ID delector on my searh form in rank.css just so I knew how to do it.
 
 ## 🚀 React part 1: Routing deliverable
