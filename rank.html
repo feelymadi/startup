@@ -61,8 +61,9 @@
     <form id="search-form" class="p-4 border rounded shadow-sm">
       <div class="d-flex gap-2">
         <label for="search">Search songs: </label>
-        <input id="search" name="query" type="search" placeholder="Songs, artists, albums…" autocomplete="off" class="form-control flex-grow-1" />
-        <button type="submit">Search for Song</button>
+        <input id="search" name="query" type="search" placeholder="Songs, artists, albums…" autocomplete="off"
+          class="form-control flex-grow-1" />
+        <button type="submit" class="btn btn-search">Search for Song</button>
       </div>
     </form>
 
@@ -70,13 +71,11 @@
     <!-- rating section -->
     <h2><span id="searchTitle">Searched Song Title</span> : <span id="searchArtist">Searched Artist</span></h2>
     <img alt="albumPhoto" src="albumcoverexample.png" width="300" />
-    <br>
-    <label for="rating">Rating (0–5)</label>
-    <input id="rating" name="rating" type="number" min="0" max="5" step="0.1" placeholder="4.5" />
-    <div>
-      <button>Submit Rating</button>
+    <div class="d-flex gap-2">
+      <label for="rating">Rating (0–5)</label>
+      <input id="rating" name="rating" type="number" min="0" max="5" step="0.1" placeholder="4.5" />
+      <button type="submit" class="btn btn-submit">Submit Rating</button>
     </div>
-
   </main>
 
   <footer class="container-fluid">
