@@ -7,12 +7,12 @@
   <title>Rank</title>
   <link rel="icon" href="favicon.ico" />
 
-  <link rel="stylesheet" href="main.css" />
-  <link rel="stylesheet" href="rank.css" />
-
   <!-- Include bootstrap CSS framework -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="rank.css" />
 
   <!-- import font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,10 +58,12 @@
   <main class="container-fluid text-center">
     <h1>Rank a Song</h1>
     <!-- search section -->
-    <form id="search-form">
-      <label for="search">Search songs</label>
-      <input id="search" name="query" type="search" placeholder="Search songs, artists, albums…" autocomplete="off" />
-      <button type="submit">Search for Song</button>
+    <form id="search-form" class="p-4 border rounded shadow-sm">
+      <div class="d-flex gap-2">
+        <label for="search">Search songs: </label>
+        <input id="search" name="query" type="search" placeholder="Songs, artists, albums…" autocomplete="off" class="form-control flex-grow-1" />
+        <button type="submit">Search for Song</button>
+      </div>
     </form>
 
 
