@@ -19,3 +19,13 @@ form {
     border: 2px solid var(--accent);
     color: var(--accent);
 }
+
+.rating-input {
+    width: 70px;
+    text-align: center;
+    border-radius: 999px;
+    padding: 10px 10px;
+    font-family: "Comfortaa", sans-serif;
+    transition: all 0.25s ease;
+}
+
