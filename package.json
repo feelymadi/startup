@@ -1,0 +1,23 @@
+{
+  "name": "startup",
+  "version": "1.0.0",
+  "description": "[My Notes](notes.md)",
+  "homepage": "https://github.com/feelymadi/startup#readme",
+  "bugs": {
+    "url": "https://github.com/feelymadi/startup/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/feelymadi/startup.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "give-me-a-joke": "^0.5.1"
+  }
+}
