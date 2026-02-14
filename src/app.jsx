@@ -16,7 +16,7 @@ import { Rank } from './rank/rank';
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="body bg-dark text-light">
+      <div className="container-fluid bg-light text-dark pt-5 mt-4 min-vh-100">
         <header className="container-fluid">
           <nav className="navbar navbar-expand-md fixed-top navbar-light">
             <div className="container-fluid">
@@ -50,14 +50,15 @@ export default function App() {
           </nav>
         </header>
 
-        <Routes>
-          <Route path='/' element={<Login />} exact />
-          <Route path='/about' element={<About />} />
-          <Route path='/charts' element={<Charts />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/rank' element={<Rank />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
+          <Routes>
+            <Route path='/' element={<Login />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/charts' element={<Charts />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/rank' element={<Rank />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+ 
 
 
         <footer className="container-fluid">
