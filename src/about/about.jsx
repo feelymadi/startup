@@ -4,7 +4,7 @@ export function About() {
   return (
     <main className="container-fluid text-center py-4">      <div>
         <h1>About</h1>
-        <div class="grid">
+        <div className="grid">
           <p>
             Do you ever feel stuck when you are listening to music? Do you ever want
             to freshen up your music taste by exploring your friends reccommendations?
@@ -15,7 +15,7 @@ export function About() {
             music listeners reccomendations.
           </p>
         </div>
-        <div class="grid">
+        <div className="grid">
           <p>
             TuneChart lets you rank songs and keep up with the best songs
             via a highest ranked chart for the week based on peoples ranking.
