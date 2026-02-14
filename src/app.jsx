@@ -20,7 +20,7 @@ export default function App() {
         <header className="container-fluid">
           <nav className="navbar navbar-expand-md fixed-top navbar-light">
             <div className="container-fluid">
-              <a className="navbar-brand" href="#">TuneChart<sup>&reg;</sup></a>
+              <div className="navbar-brand">TuneChart<sup>&reg;</sup></div>
 
               <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
                 aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,19 +30,19 @@ export default function App() {
               <div className="collapse navbar-collapse" id="mainNav">
                 <ul className="navbar-nav ms-auto">
                   <li className="nav-item">
-                    <a className="nav-link active" href="index.html">Home</a>
+                    <NavLink className="nav-link active" to="/">Home</NavLink>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="rank.html">Rank a Song</a>
+                    <NavLink className="nav-link" to="rank">Rank a Song</NavLink>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="profile.html">Profile</a>
+                    <NavLink className="nav-link" to="profile">Profile</NavLink>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="charts.html">Weekly Chart</a>
+                    <NavLink className="nav-link" to="charts">Weekly Chart</NavLink>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="about.html">About</a>
+                    <NavLink className="nav-link" to="about">About</NavLink>
                   </li>
                 </ul>
               </div>
