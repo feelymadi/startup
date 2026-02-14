@@ -94,9 +94,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [x] **Bundled using Vite** - I completed this part of the deliverable.
+      I downloaded and loaded all the correct packages to bundle with vite.
+- [x] **Components** - I completed this part of the deliverable.
+      This part took awhile to make sure the css translated well but in the end I fixed all the tags and such to make it work.
+- [x] **Router** - I completed this part of the deliverable.
+      This part was pretty easy I just changed then to nav inks and added the router
 
 ## 🚀 React part 2: Reactivity deliverable
 
