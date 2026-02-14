@@ -1,8 +1,10 @@
 import React from 'react';
+import './about.css';
 
 export function About() {
   return (
-    <main className="container-fluid text-center py-4">      <div>
+    <main className="container-fluid text-center py-4">
+      <div>
         <h1>About</h1>
         <div className="grid">
           <p>

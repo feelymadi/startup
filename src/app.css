@@ -116,3 +116,8 @@ p {
     border: 2px solid var(--accent);
     color: var(--accent);
 }
+
+#root {
+  min-height: 100vh;
+  background: var(--bg-main) !important;
+}

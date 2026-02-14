@@ -1,8 +1,9 @@
 import React from 'react';
+import './rank.css';
 
 export function Rank() {
   return (
-    <main className="container-fluid text-center bg-light min-vh-100 py-4">
+    <main className="container-fluid text-center min-vh-100 py-4">
       <div>
         <h1>Rank a Song</h1>
         <form id="search-form" className="p-4 border rounded shadow-sm">

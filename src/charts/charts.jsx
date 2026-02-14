@@ -3,7 +3,7 @@ import './charts.css';
 
 export function Charts() {
   return (
-    <main className="container-fluid text-center bg-light min-vh-100 py-4">
+    <main className="container-fluid text-center min-vh-100 py-4">
       <div>
         <div className="alert alert-info" role="alert">
           <ul className="notification">
