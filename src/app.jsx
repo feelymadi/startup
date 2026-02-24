@@ -60,7 +60,23 @@ export default function App() {
         </header>
         <main>
           <Routes>
-            <Route path="/" element={<Login user={user} onLogin={setUser} />} />
+            <Route path="/" element={
+              user ? (
+                <div className="container text-center mt-5">
+                  <h1>Welcome to TuneChart</h1>
+                  <p>You are signed in as {user.email}</p>
+                  <button
+                    className="btn btn-outline-dark mt-3"
+                    onClick={() => setUser(null)}
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <Login onLogin={setUser} />
+              )
+            }
+            />
             <Route path="/about" element={<About />} />
             <Route path="/charts" element={user ? <Charts user={user} /> : <Login user={user} onLogin={setUser} />} />
             <Route path="/profile" element={user ? <Profile user={user} /> : <Login user={user} onLogin={setUser} />} />
