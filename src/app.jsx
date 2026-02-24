@@ -17,6 +17,21 @@ import { Rank } from './rank/rank';
 export default function App() {
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    const savedUser = localStorage.getItem('tunechart:user');
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('tunechart:user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('tunechart:user');
+    }
+  }, [user]);
+
 
   return (
     <BrowserRouter>

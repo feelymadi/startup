@@ -55,6 +55,9 @@ events
 form 
   submit only applies to login not create
 
+useEffect
+  allows you to run code after React renders a component
+
 
 
 ```jsx
