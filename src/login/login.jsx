@@ -6,27 +6,19 @@ export function Login({ onLogin }) {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  onSubmit = {(e) => {
+  function handleSubmit(e) {
     e.preventDefault();
     if (email.trim() !== '') {
       onLogin({ email });
-      navigate('/profile');
+      navigate('/profile'); // redirect after login
     }
   }
-}
 
 return (
   <main className="container-fluid text-center py-4">
     <h1>Welcome to TuneChart</h1>
     <form
-      className="p-4 border rounded shadow-sm mx-auto" style={{ maxWidth: '400px' }}
-
-      onSubmit={(e) => {
-        e.preventDefault(); // prevents page reload
-        if (email.trim() !== '') {
-          onLogin({ email });
-        }
-      }}
+      className="p-4 border rounded shadow-sm mx-auto" style={{ maxWidth: '400px' }} onSubmit={handleSubmit}
     >
       <div className="mb-3">
         <span>Email</span>
