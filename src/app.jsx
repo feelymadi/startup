@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -15,6 +15,9 @@ import { Rank } from './rank/rank';
 
 
 export default function App() {
+  const [user, setUser] = useState(null);
+
+
   return (
     <BrowserRouter>
       <div className="body">
@@ -57,7 +60,7 @@ export default function App() {
         </header>
         <main>
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/" element={<Login user={user} onLogin={setUser} />} />
             <Route path="/about" element={<About />} />
             <Route path="/charts" element={<Charts />} />
             <Route path="/profile" element={<Profile />} />

@@ -38,9 +38,13 @@ Setting up Vite and React was pretty simple. I had a bit of trouble because of c
 
 ## React Part 2: Reactivity
 
-This was a lot of fun to see it all come together. I had to keep remembering to use React state instead of just manipulating the DOM directly.
+useState - 
+  component remember information between renders 
+  const [(current value), (function that updates it)] = useState(""); (Initial value is empty string)
+  
 
-Handling the toggling of the checkboxes was particularly interesting.
+
+
 
 ```jsx
 <div className="input-group sound-button-container">
