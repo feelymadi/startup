@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './rank.css';
 
 export function Rank() {
+  const [songs, setSongs] = useState([
+    { id: 1, title: 'Cursed', artist: 'Lord Huron', rating: 4.7 },
+    { id: 2, title: 'Would That I', artist: 'Hozier', rating: 4.4 },
+  ]);
+
+  const [query, setQuery] = useState('');
+  
+  const [searchedSong, setSearchedSong] = useState({
+    title: 'Searched Song Title',
+    artist: 'Searched Artist',
+    image: 'albumcoverexample.png',
+  });
+
+
   return (
     <main className="container-fluid text-center min-vh-100 py-4">
       <div>
