@@ -32,6 +32,20 @@ export function Rank() {
     setHasSearched(true);
   }
 
+  function handleSubmitRating() {
+    const ratingNumber = Number(ratingInput);
+    if (!Number.isFinite(ratingNumber) || ratingNumber < 0 || ratingNumber > 5) return;
+
+    setSongs(prev =>
+      prev.map(song =>
+        song.id === searchedSong.id ? { ...song, rating: ratingNumber } : song
+      )
+    );
+
+    setSearchedSong(prev => ({ ...prev, rating: ratingNumber }));
+    setRatingInput('');
+  }
+
   return (
     <main className="container-fluid text-center min-vh-100 py-4">
       <div>
@@ -57,15 +71,21 @@ export function Rank() {
 
             <div className="d-flex justify-content-center align-items-center gap-3 mt-3">
               <label htmlFor="ratingInput">Rank song: </label>
-              <input
-                id="ratingInput"
-                value={ratingInput}
-                onChange={(e) => setRatingInput(e.target.value)}
-              />
-              <button type="submit" className="btn btn-submit">Submit Rating</button>
+              <select id="ratingInput" className="form-select" style={{ maxWidth: 140 }} value={ratingInput} onChange={(e) => setRatingInput(e.target.value)}>
+                <option value="" disabled>Select</option>
+                {[...Array(9)].map((_, i) => {
+                  const val = (i + 2) / 2;
+                  return (
+                    <option key={val} value={val}>
+                      {val}
+                    </option>
+                  );
+                })}
+              </select>
+              <button type="button" className="btn btn-submit">Submit Rating</button>
             </div>
           </>
-          
+
         )}
       </div>
     </main>
