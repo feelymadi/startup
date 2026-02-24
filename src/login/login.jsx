@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-
-export function Login() {
+export function Login({ onLogin }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
   return (
     <main className="container-fluid text-center py-4">
       <h1>Welcome to TuneChart</h1>

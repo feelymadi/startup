@@ -62,9 +62,9 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Login user={user} onLogin={setUser} />} />
             <Route path="/about" element={<About />} />
-            <Route path="/charts" element={<Charts />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/rank" element={<Rank />} />
+            <Route path="/charts" element={user ? <Charts user={user} /> : <Login user={user} onLogin={setUser} />} />
+            <Route path="/profile" element={user ? <Profile user={user} /> : <Login user={user} onLogin={setUser} />} />
+            <Route path="/rank" element={user ? <Rank user={user} /> : <Login user={user} onLogin={setUser} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
