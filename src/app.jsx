@@ -41,15 +41,21 @@ export default function App() {
                   <li className="nav-item">
                     <NavLink className="nav-link" to="/" end>Home</NavLink>
                   </li>
-                  <li className="nav-item">
-                    <NavLink className="nav-link" to="/rank">Rank a Song</NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink className="nav-link" to="/profile">Profile</NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink className="nav-link" to="/charts">Weekly Chart</NavLink>
-                  </li>
+
+                  {user && (
+                    <>
+                      <li className="nav-item">
+                        <NavLink className="nav-link" to="/rank">Rank a Song</NavLink>
+                      </li>
+                      <li className="nav-item">
+                        <NavLink className="nav-link" to="/profile">Profile</NavLink>
+                      </li>
+                      <li className="nav-item">
+                        <NavLink className="nav-link" to="/charts">Weekly Chart</NavLink>
+                      </li>
+                    </>
+                  )}
+
                   <li className="nav-item">
                     <NavLink className="nav-link" to="/about">About</NavLink>
                   </li>
@@ -89,7 +95,7 @@ export default function App() {
           <a href="https://github.com/feelymadi">GitHub</a>
         </footer>
       </div>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 }
 
