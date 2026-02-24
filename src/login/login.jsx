@@ -6,14 +6,16 @@ export function Login({ onLogin }) {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+    // if an email is submitted navigate to profile
   function handleSubmit(e) {
     e.preventDefault();
     if (email.trim() !== '') {
       onLogin({ email });
-      navigate('/profile'); // redirect after login
+      navigate('/profile');
     }
   }
 
+    // same as submit but for create button
   function handleCreate() {
     if (email.trim() !== '') {
       onLogin({ email });
