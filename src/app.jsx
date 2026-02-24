@@ -15,8 +15,10 @@ import { Rank } from './rank/rank';
 
 
 export default function App() {
+  // current user
   const [user, setUser] = useState(null);
 
+  // restore stored user if has one
   useEffect(() => {
     const savedUser = localStorage.getItem('tunechart:user');
     if (savedUser) {
@@ -24,6 +26,7 @@ export default function App() {
     }
   }, []);
 
+  // updates local storage when logout
   useEffect(() => {
     if (user) {
       localStorage.setItem('tunechart:user', JSON.stringify(user));
@@ -53,10 +56,17 @@ export default function App() {
               </button>
               <div className="collapse navbar-collapse" id="mainNav">
                 <ul className="navbar-nav ms-auto">
+
+                  {/* home, default, login */}
                   <li className="nav-item">
                     <NavLink className="nav-link" to="/" end>Home</NavLink>
                   </li>
 
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/about">About</NavLink>
+                  </li>
+
+                  {/* conditional tabs */}
                   {user && (
                     <>
                       <li className="nav-item">
@@ -71,9 +81,7 @@ export default function App() {
                     </>
                   )}
 
-                  <li className="nav-item">
-                    <NavLink className="nav-link" to="/about">About</NavLink>
-                  </li>
+
                 </ul>
               </div>
             </div>
@@ -81,6 +89,7 @@ export default function App() {
         </header>
         <main>
           <Routes>
+            {/* changes home page when logged in */}
             <Route path="/" element={
               user ? (
                 <div className="container text-center mt-5">
@@ -99,10 +108,12 @@ export default function App() {
             }
             />
             <Route path="/about" element={<About />} />
+            {/* protected routes */}
             <Route path="/charts" element={user ? <Charts user={user} /> : <Login user={user} onLogin={setUser} />} />
             <Route path="/profile" element={user ? <Profile user={user} /> : <Login user={user} onLogin={setUser} />} />
             <Route path="/rank" element={user ? <Rank user={user} /> : <Login user={user} onLogin={setUser} />} />
             <Route path="*" element={<NotFound />} />
+
           </Routes>
         </main>
         <footer className="container-fluid">
