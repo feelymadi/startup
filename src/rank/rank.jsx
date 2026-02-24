@@ -7,7 +7,8 @@ export function Rank() {
     { id: 2, title: 'Would That I', artist: 'Hozier', rating: 4.4 },
   ]);
 
-  const [query, setQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [ratingInput, setRatingInput] = useState('');
 
   const [searchedSong, setSearchedSong] = useState({
     title: 'Searched Song Title',
@@ -17,13 +18,19 @@ export function Rank() {
 
   function handleSearch(e) {
     e.preventDefault();
-    if (!query.trim()) return;
+    const q = searchQuery.trim();
+    if (!q) return;
+
     setSearchedSong({
-      title: query.trim(),
+      title: q,
       artist: 'Unknown Artist',
       image: 'albumcoverexample.png',
     });
+
+
   }
+
+
 
   return (
     <main className="container-fluid text-center min-vh-100 py-4">
@@ -31,7 +38,10 @@ export function Rank() {
         <h1>Rank a Song</h1>
         <form id="search-form" className="p-4 border rounded shadow-sm" onSubmit={handleSearch}>
           <div className="d-flex gap-2">
-            <label for="search">Search songs: </label>
+            <label htmlFor="searchInput">Search songs: </label>
+            <input id="searchInput" name="search" type="search" placeholder="Songs, artists, albums…" autoComplete="off"
+              className="form-control flex-grow-1" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
+            />
             <input id="search" name="query" type="search" placeholder="Songs, artists, albums…" autocomplete="off"
               className="form-control flex-grow-1" />
             <button type="submit" className="btn btn-search">Search for Song</button>
