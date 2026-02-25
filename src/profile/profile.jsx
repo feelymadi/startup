@@ -35,37 +35,31 @@ export function Profile({ songs, user }) {
         )}
 
         <h2>Your all time Ratings Chart</h2>
-        <table className="rank-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Title</th>
-              <th>Artist</th>
-              <th>Rating</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Fool for Love</td>
-              <td>Lord Huron</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Would that I</td>
-              <td>Hozier</td>
-              <td>4.8</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Cleopatra</td>
-              <td>The Lumineers</td>
-              <td>4.5</td>
-            </tr>
-          </tbody>
-        </table>
-        <a href="rank.html" className="btn">Rank New Song</a>
+        {rankedSongs.length > 0 ? (
+          <table className="rank-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Rating</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rankedSongs.map((song, i) => (
+                <tr key={song.id}>
+                  <td>{i + 1}</td>
+                  <td>{song.title}</td>
+                  <td>{song.artist}</td>
+                  <td>{song.userRating}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p className="mt-3">Rate songs in the Rank tab to build your profile chart.</p>
+        )}
+        <a href="/rank" className="btn">Rank New Song</a>
       </div>
     </main>
   );
