@@ -2,24 +2,18 @@ import React, { useEffect, useState } from 'react';
 import './rank.css';
 
 export function Rank({ songs, setSongs, user }) {
-  // variable for submission confirmation
-  const [showThanks, setShowThanks] = useState(false);
 
   // variable for storing username 
   const username = (user?.email || user?.name || user?.username || 'anonymous').toLowerCase();
 
+  // variables for searching
   const [searchQuery, setSearchQuery] = useState('');
-
   const [hasSearched, setHasSearched] = useState(false);
-
-
-
-  const [ratingInput, setRatingInput] = useState('');
-
   const [searchedSong, setSearchedSong] = useState(() => {
     return songs.find(s => s.title === 'Would That I') ?? songs[0] ?? null;
   });
 
+  // search function 
   function handleSearch(e) {
     e.preventDefault();
     setShowThanks(false);
@@ -35,6 +29,10 @@ export function Rank({ songs, setSongs, user }) {
     setHasSearched(true);
   }
 
+  // variable for rating
+  const [ratingInput, setRatingInput] = useState('');
+
+  // rating function
   function handleSubmitRating() {
     const ratingNumber = Number(ratingInput);
     if (!Number.isFinite(ratingNumber) || ratingNumber < 0.5 || ratingNumber > 5) return;
@@ -63,6 +61,10 @@ export function Rank({ songs, setSongs, user }) {
 
   }
 
+  // variable for submission confirmation
+  const [showThanks, setShowThanks] = useState(false);
+
+  // display confirmation timed
   useEffect(() => {
     if (!showThanks) return;
     const t = setTimeout(() => setShowThanks(false), 3000);
@@ -72,7 +74,10 @@ export function Rank({ songs, setSongs, user }) {
   return (
     <main className="container-fluid text-center min-vh-100 py-4">
       <div>
+
         <h1>Rank a Song</h1>
+
+        {/* search form */}
         <form id="search-form" className="p-4 border rounded shadow-sm" onSubmit={handleSearch}>
           <div className="d-flex gap-2">
             <label htmlFor="searchInput">Search songs: </label>
@@ -81,6 +86,7 @@ export function Rank({ songs, setSongs, user }) {
           </div>
         </form>
 
+        {/* show after song is search (show result) */}
         {hasSearched && searchedSong && (
           <>
             <h2>{searchedSong.title} : {searchedSong.artist}</h2>
@@ -100,11 +106,13 @@ export function Rank({ songs, setSongs, user }) {
                 <option value="4.5">4.5</option>
                 <option value="5">5</option>
               </select>
+              {/* rating button */}
               <button type="button" className="btn btn-submit" onClick={handleSubmitRating}>Submit Rating</button>
             </div>
           </>
         )}
 
+        {/* rating submisison confirmation */}
         {showThanks && (
           <div className="alert alert-success mt-3" role="alert">
             Thank you for ranking!
