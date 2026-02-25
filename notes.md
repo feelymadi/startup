@@ -58,6 +58,11 @@ form
 useEffect
   allows you to run code after React renders a component
 
+basic structure 
+  begin with imports
+  export function ... ({ pass in needed variables or functions from parent jsx }) {}
+  return ( html that utilized variables and function, useState, and events in the previous section)
+
 
 
 ```jsx
