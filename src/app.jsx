@@ -28,9 +28,36 @@ export default function App() {
     return saved
       ? JSON.parse(saved)
       : [
-        { id: 1, title: 'Cursed', artist: 'Lord Huron', rating: 4.7, image: 'albumcoverexample.png' },
-        { id: 2, title: 'Would That I', artist: 'Hozier', rating: 4.4, image: 'albumExampleHozier.png' },
-        { id: 3, title: 'Fool for Love', artist: 'Lord Huron', rating: 4.7, image: 'albumcoverexample.png' },
+        {
+          id: 1,
+          title: 'Cursed',
+          artist: 'Lord Huron',
+          image: 'albumcoverexample.png',
+          ratingsByUser: {
+            madi: 4,
+            alex: 4,
+          }
+        },
+        {
+          id: 2,
+          title: 'Would That I',
+          artist: 'Hozier',
+          image: 'albumExampleHozier.png' ,
+          ratingsByUser: {
+            madi: 3,
+            alex: 3,
+          }
+        },
+        {
+          id: 3,
+          title: 'Fool for Love',
+          artist: 'Lord Huron',
+          image: 'albumcoverexample.png' ,
+          ratingsByUser: {
+            madi: 5,
+            alex: 5,
+          }
+        },
       ];
   }
 
@@ -133,7 +160,7 @@ export default function App() {
                   <Rank user={user} songs={songs} setSongs={setSongs} />
                 ) : (
                   <Login user={user} onLogin={setUser} />
-                )}/>
+                )} />
             <Route path="*" element={<NotFound />} />
 
           </Routes>
