@@ -66,7 +66,7 @@ export function Charts({ songs }) {
             </tbody>
           </table>
         ) : (
-          <p className="mt-3">No songs have been rated yet.</p>
+          <p className="mt-3">No songs have been rated yet :/</p>
         )}
       </div>
     </main>

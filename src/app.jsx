@@ -14,6 +14,15 @@ export default function App() {
   // current user
   const [user, setUser] = useState(null);
 
+  // notification 
+  const [notifications, setNotifications] = useState([]);
+  function addNotification(text) {
+    setNotifications(prev => [
+      { id: crypto.randomUUID(), text, time: new Date().toLocaleTimeString() },
+      ...prev,
+    ].slice(0, 5));
+  }
+
   // global song storage
   const SONGS_KEY = 'tunechart_songs';
   const [songs, setSongs] = useState(loadSongs);
@@ -143,7 +152,7 @@ export default function App() {
             />
             <Route path="/about" element={<About />} />
             {/* protected routes */}
-            <Route path="/charts" element={user ? <Charts user={user} songs={songs} /> : <Login user={user} onLogin={setUser} />} />
+            <Route path="/charts" element={user ? <Charts user={user} songs={songs} notifications={notifications} /> : <Login user={user} onLogin={setUser} />} />
             <Route path="/profile" element={user ? <Profile user={user} songs={songs} /> : <Login user={user} onLogin={setUser} />} />
             <Route path="/rank" element={user ? <Rank user={user} songs={songs} setSongs={setSongs} /> : <Login user={user} onLogin={setUser} />} />
             <Route path="*" element={<NotFound />} />
