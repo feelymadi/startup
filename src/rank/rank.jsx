@@ -35,11 +35,25 @@ export function Rank({ songs, setSongs, user }) {
 
     setSongs(prev =>
       prev.map(song =>
-        song.id === searchedSong.id ? { ...song, rating: ratingNumber } : song
+        song.id === searchedSong.id
+          ? {
+            ...song,
+            ratingsByUser: {
+              ...(song.ratingsByUser ?? {}),
+              [username]: ratingNumber,
+            },
+          }
+          : song
       )
     );
 
-    setSearchedSong(prev => ({ ...prev, rating: ratingNumber }));
+    setSearchedSong(prev => ({
+      ...prev,
+      ratingsByUser: {
+        ...(prev.ratingsByUser ?? {}),
+        [username]: ratingNumber,
+      },
+    }));
     setRatingInput('');
   }
 
@@ -58,14 +72,7 @@ export function Rank({ songs, setSongs, user }) {
         {hasSearched && (
           <>
             <h2>{searchedSong.title} : {searchedSong.artist}</h2>
-
-            <img
-              alt="albumPhoto"
-              src={searchedSong.image}
-              width="300"
-              className="album-cover"
-            />
-
+            <img alt="albumPhoto" src={searchedSong.image} width="300" className="album-cover" />
             <div className="d-flex justify-content-center align-items-center gap-3 mt-3">
               <label htmlFor="ratingInput">Rank song:</label>
               <select id="ratingInput" className="form-select" style={{ maxWidth: 140 }} value={ratingInput} onChange={(e) => setRatingInput(e.target.value)}>
@@ -81,10 +88,9 @@ export function Rank({ songs, setSongs, user }) {
                 <option value="4.5">4.5</option>
                 <option value="5">5</option>
               </select>
-              <button type="button" className="btn btn-submit">Submit Rating</button>
+              <button type="button" className="btn btn-submit" onClick={handleSubmitRating}>Submit Rating</button>
             </div>
           </>
-
         )}
       </div>
     </main>
