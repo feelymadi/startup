@@ -3,16 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-
-
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { About } from './about/about';
 import { Charts } from './charts/charts';
 import { Login } from './login/login';
 import { Profile } from './profile/profile';
 import { Rank } from './rank/rank';
-
-
 
 export default function App() {
   // current user
@@ -42,7 +38,7 @@ export default function App() {
           id: 2,
           title: 'Would That I',
           artist: 'Hozier',
-          image: 'albumExampleHozier.png' ,
+          image: 'albumExampleHozier.png',
           ratingsByUser: {
             madi: 3,
             alex: 3,
@@ -52,7 +48,7 @@ export default function App() {
           id: 3,
           title: 'Fool for Love',
           artist: 'Lord Huron',
-          image: 'albumcoverexample.png' ,
+          image: 'albumcoverexample.png',
           ratingsByUser: {
             madi: 5,
             alex: 5,
@@ -81,11 +77,6 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem(SONGS_KEY, JSON.stringify(songs));
   }, [songs]);
-
-
-
-
-
 
   return (
     <BrowserRouter>
@@ -173,8 +164,6 @@ export default function App() {
     </BrowserRouter >
   );
 }
-
-
 
 function NotFound() {
   return (

@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import './rank.css';
 
-export function Rank() {
-  const [songs, setSongs] = useState([
-    { id: 1, title: 'Cursed', artist: 'Lord Huron', rating: 4.7, image: 'albumcoverexample.png' },
-    { id: 2, title: 'Would That I', artist: 'Hozier', rating: 4.4, image: 'albumExampleHozier.png' },
-    { id: 3, title: 'Fool for Love', artist: 'Lord Huron', rating: 4.7, image: 'albumcoverexample.png' },
-  ]);
+export function Rank({ songs, setSongs, user }) {
+
 
   const [searchQuery, setSearchQuery] = useState('');
   const [ratingInput, setRatingInput] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
+  const username = user?.name || user?.username || 'anonymous';
 
   const [searchedSong, setSearchedSong] = useState({
     title: 'Searched Song Title',
