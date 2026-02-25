@@ -9,24 +9,15 @@ export function Charts({ songs }) {
     return Math.round(avg * 10) / 10;
   }
 
-  function getRaterCount(song) {
-    return Object.values(song.ratingsByUser ?? {}).length;
-  }
-
-
   const rankedSongs = [...songs]
     .map(song => ({
       ...song,
       globalRating: getGlobalRating(song),
-      raterCount: getRaterCount(song),
     }))
     .filter(song => song.globalRating != null)
     .sort((a, b) => b.globalRating - a.globalRating);
 
   const topSong = rankedSongs[0] ?? null;
-
-
-
 
 
   return (
@@ -40,12 +31,12 @@ export function Charts({ songs }) {
         </div>
 
         <h1>Welcome to our Weekly Chart</h1>
-        
+
         <h2>Top Song</h2>
         {topSong ? (
           <>
             <h2><span id="topTitle">{topSong.title}</span> :{' '}<span id="topArtist">{topSong.artist}</span></h2>
-            <img alt="albumPhoto" src={topSong.image} width="300"className="album-cover"/>
+            <img alt="albumPhoto" src={topSong.image} width="300" className="album-cover" />
           </>
         ) : (
           <p>No songs have been rated yet.</p>
