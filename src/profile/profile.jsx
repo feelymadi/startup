@@ -2,7 +2,7 @@ import React from 'react';
 import './profile.css';
 
 export function Profile({ songs, user }) {
-  
+
   const username = user?.name || user?.username || 'anonymous';
 
   const rankedSongs = [...songs]
@@ -20,8 +20,20 @@ export function Profile({ songs, user }) {
     <main className="container-fluid text-center min-vh-100 py-4">
       <div>
         <h1>Profile</h1>
-        <h2>Your Top Song: <span id="topTitle">Fool for Love</span> by <span id="topArtist">Lord Huron</span></h2>
-        <img alt="albumPhoto" src="albumcoverexample.png" width="300" className="album-cover" />
+        <h2>Your Top Song</h2>
+
+        {topSong ? (
+          <>
+            <h2>
+              <span id="topTitle">{topSong.title}</span> by{' '}
+              <span id="topArtist">{topSong.artist}</span>
+            </h2>
+            <img alt="albumPhoto" src={topSong.image} width="300" className="album-cover" />
+          </>
+        ) : (
+          <p>You haven’t rated any songs yet :/</p>
+        )}
+
         <h2>Your all time Ratings Chart</h2>
         <table className="rank-table">
           <thead>
