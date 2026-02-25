@@ -39,30 +39,35 @@ export function Charts({ songs }) {
             <img alt="albumPhoto" src={topSong.image} width="300" className="album-cover" />
           </>
         ) : (
-          <p>No songs have been rated yet.</p>
+          <p>No songs have been rated yet :/</p>
         )}
 
         <h2>This Weeks Chart</h2>
-        <table className="rank-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Title</th>
-              <th>Artist</th>
-              <th>Rating</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rankedSongs.map((song, i) => (
-              <tr key={song.id}>
-                <td>{i + 1}</td>
-                <td>{song.title}</td>
-                <td>{song.artist}</td>
-                <td>{song.globalRating}</td>
+
+        {rankedSongs.length > 0 ? (
+          <table className="rank-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Rating</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {rankedSongs.map((song, i) => (
+                <tr key={song.id}>
+                  <td>{i + 1}</td>
+                  <td>{song.title}</td>
+                  <td>{song.artist}</td>
+                  <td>{song.globalRating}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p className="mt-3">No songs have been rated yet.</p>
+        )}
       </div>
     </main>
   );
