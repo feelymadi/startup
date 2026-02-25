@@ -2,7 +2,6 @@ import React from 'react';
 import './charts.css';
 
 export function Charts({ songs }) {
-
   function getGlobalRating(song) {
     const ratings = Object.values(song.ratingsByUser ?? {});
     if (ratings.length === 0) return null;
@@ -13,6 +12,21 @@ export function Charts({ songs }) {
   function getRaterCount(song) {
     return Object.values(song.ratingsByUser ?? {}).length;
   }
+
+
+  const rankedSongs = [...songs]
+    .map(song => ({
+      ...song,
+      globalRating: getGlobalRating(song),
+      raterCount: getRaterCount(song),
+    }))
+    .filter(song => song.globalRating != null)
+    .sort((a, b) => b.globalRating - a.globalRating);
+
+  const topSong = rankedSongs[0] ?? null;
+
+
+
 
 
   return (
@@ -26,9 +40,17 @@ export function Charts({ songs }) {
         </div>
 
         <h1>Welcome to our Weekly Chart</h1>
+        
         <h2>Top Song</h2>
-        <h2><span id="topTitle">Cursed</span> : <span id="topArtist">Lord Huron</span></h2>
-        <img alt="albumPhoto" src="albumcoverexample.png" width="300" className="album-cover" />
+        {topSong ? (
+          <>
+            <h2><span id="topTitle">{topSong.title}</span> :{' '}<span id="topArtist">{topSong.artist}</span></h2>
+            <img alt="albumPhoto" src={topSong.image} width="300"className="album-cover"/>
+          </>
+        ) : (
+          <p>No songs have been rated yet.</p>
+        )}
+
         <h2>This Weeks Chart</h2>
         <table className="rank-table">
           <thead>
