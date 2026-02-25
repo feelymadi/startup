@@ -2,8 +2,23 @@ import React from 'react';
 import './profile.css';
 
 export function Profile({ songs, user }) {
+  
+  const username = user?.name || user?.username || 'anonymous';
+
+  const rankedSongs = [...songs]
+    .map(song => ({
+      ...song,
+      userRating: song.ratingsByUser?.[username] ?? null,
+    }))
+    .filter(song => song.userRating != null)
+    .sort((a, b) => b.userRating - a.userRating);
+
+  const topSong = rankedSongs[0] ?? null;
+
+
   return (
-    <main className="container-fluid text-center min-vh-100 py-4">      <div>
+    <main className="container-fluid text-center min-vh-100 py-4">
+      <div>
         <h1>Profile</h1>
         <h2>Your Top Song: <span id="topTitle">Fool for Love</span> by <span id="topArtist">Lord Huron</span></h2>
         <img alt="albumPhoto" src="albumcoverexample.png" width="300" className="album-cover" />
