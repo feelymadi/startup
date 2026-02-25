@@ -9,10 +9,8 @@ export function Rank({ songs, setSongs, user }) {
   const [hasSearched, setHasSearched] = useState(false);
   const username = user?.name || user?.username || 'anonymous';
 
-  const [searchedSong, setSearchedSong] = useState({
-    title: 'Searched Song Title',
-    artist: 'Searched Artist',
-    image: 'albumcoverexample.png',
+  const [searchedSong, setSearchedSong] = useState(() => {
+    return songs.find(s => s.title === 'Would That I') ?? songs[0] ?? null;
   });
 
   function handleSearch(e) {
@@ -31,7 +29,7 @@ export function Rank({ songs, setSongs, user }) {
 
   function handleSubmitRating() {
     const ratingNumber = Number(ratingInput);
-    if (!Number.isFinite(ratingNumber) || ratingNumber < 0 || ratingNumber > 5) return;
+    if (!Number.isFinite(ratingNumber) || ratingNumber < 0.5 || ratingNumber > 5) return;
 
     setSongs(prev =>
       prev.map(song =>
@@ -69,7 +67,7 @@ export function Rank({ songs, setSongs, user }) {
           </div>
         </form>
 
-        {hasSearched && (
+        {hasSearched && searchedSong && (
           <>
             <h2>{searchedSong.title} : {searchedSong.artist}</h2>
             <img alt="albumPhoto" src={searchedSong.image} width="300" className="album-cover" />
