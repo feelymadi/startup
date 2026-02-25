@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './charts.css';
 
 export function Charts({ songs, notifications }) {
@@ -9,16 +9,37 @@ export function Charts({ songs, notifications }) {
     return Math.round(avg * 10) / 10;
   }
 
-  const mockNotifications = [
-    { id: 1, text: 'Madi rated "Cursed" (4)', time: '4:12 PM' },
-    { id: 2, text: 'Alex rated "Fool for Love" (5)', time: '4:05 PM' },
-    { id: 3, text: 'Jo rated "Would That I" (3)', time: '3:58 PM' },
-  ];
+  const [liveMocks, setLiveMocks] = useState([]);
+  const mockUsers = ['Madi', 'Alex', 'Jo', 'Sam', 'Taylor'];
+  const mockRatings = [3, 3.5, 4, 4.5, 5];
+
+  function generateRandomNotification() {
+    const randomUser = mockUsers[Math.floor(Math.random() * mockUsers.length)];
+    const randomSong = songs[Math.floor(Math.random() * songs.length)];
+    const randomRating = mockRatings[Math.floor(Math.random() * mockRatings.length)];
+
+    return {
+      id: crypto.randomUUID(),
+      text: `${randomUser} rated "${randomSong?.title}" (${randomRating})`,
+      time: new Date().toLocaleTimeString(),
+    };
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLiveMocks(prev => [
+        generateRandomNotification(),
+        ...prev
+      ].slice(0, 5));
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [songs]);
 
   const displayNotifications =
     (notifications?.length ?? 0) > 0
       ? notifications
-      : mockNotifications;
+      : liveMocks;
 
   const rankedSongs = [...songs]
     .map(song => ({
