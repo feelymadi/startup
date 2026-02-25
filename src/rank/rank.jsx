@@ -7,7 +7,7 @@ export function Rank({ songs, setSongs, user }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [ratingInput, setRatingInput] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
-  const username = user?.name || user?.username || 'anonymous';
+  const username = (user?.email || user?.name || user?.username || 'anonymous').toLowerCase();
   const [showThanks, setShowThanks] = useState(false);
 
   const [searchedSong, setSearchedSong] = useState(() => {
@@ -59,7 +59,7 @@ export function Rank({ songs, setSongs, user }) {
 
   useEffect(() => {
     if (!showThanks) return;
-    const t = setTimeout(() => setShowThanks(false), 3000); 
+    const t = setTimeout(() => setShowThanks(false), 3000);
     return () => clearTimeout(t);
   }, [showThanks]);
 

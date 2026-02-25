@@ -2,8 +2,7 @@ import React from 'react';
 import './profile.css';
 
 export function Profile({ songs, user }) {
-
-  const username = user?.name || user?.username || 'anonymous';
+  const username = (user?.email || user?.name || user?.username || 'anonymous').toLowerCase();
 
   const rankedSongs = [...songs]
     .map(song => ({
@@ -34,7 +33,7 @@ export function Profile({ songs, user }) {
           <p>You haven’t rated any songs yet :/</p>
         )}
 
-        <h2>Your all time Ratings Chart</h2>
+        <h2>Your Ratings</h2>
         {rankedSongs.length > 0 ? (
           <table className="rank-table">
             <thead>
