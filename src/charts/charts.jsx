@@ -1,7 +1,20 @@
 import React from 'react';
 import './charts.css';
 
-export function Charts() {
+export function Charts({ songs }) {
+
+  function getGlobalRating(song) {
+    const ratings = Object.values(song.ratingsByUser ?? {});
+    if (ratings.length === 0) return null;
+    const avg = ratings.reduce((sum, r) => sum + r, 0) / ratings.length;
+    return Math.round(avg * 10) / 10;
+  }
+
+  function getRaterCount(song) {
+    return Object.values(song.ratingsByUser ?? {}).length;
+  }
+
+
   return (
     <main className="container-fluid text-center min-vh-100 py-4">
       <div>
