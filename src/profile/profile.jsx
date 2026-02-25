@@ -2,8 +2,10 @@ import React from 'react';
 import './profile.css';
 
 export function Profile({ songs, user }) {
+  // username
   const username = (user?.email || user?.name || user?.username || 'anonymous').toLowerCase();
 
+  // compile user's ranked songs
   const rankedSongs = [...songs]
     .map(song => ({
       ...song,
@@ -11,9 +13,7 @@ export function Profile({ songs, user }) {
     }))
     .filter(song => song.userRating != null)
     .sort((a, b) => b.userRating - a.userRating);
-
   const topSong = rankedSongs[0] ?? null;
-
 
   return (
     <main className="container-fluid text-center min-vh-100 py-4">
@@ -21,6 +21,8 @@ export function Profile({ songs, user }) {
         <h1>Profile</h1>
         <h2>Your Top Song</h2>
 
+
+        {/* show top song and photo if exists */}
         {topSong ? (
           <>
             <h2>
@@ -33,7 +35,9 @@ export function Profile({ songs, user }) {
           <p>You haven’t rated any songs yet :/</p>
         )}
 
+
         <h2>Your Ratings</h2>
+        {/* show ranked songs if exists */}
         {rankedSongs.length > 0 ? (
           <table className="rank-table">
             <thead>
@@ -45,6 +49,7 @@ export function Profile({ songs, user }) {
               </tr>
             </thead>
             <tbody>
+              {/* use ranked songs to compile table */}
               {rankedSongs.map((song, i) => (
                 <tr key={song.id}>
                   <td>{i + 1}</td>

@@ -2,13 +2,19 @@ import React, { useEffect, useState } from 'react';
 import './rank.css';
 
 export function Rank({ songs, setSongs, user }) {
+  // variable for submission confirmation
+  const [showThanks, setShowThanks] = useState(false);
 
+  // variable for storing username 
+  const username = (user?.email || user?.name || user?.username || 'anonymous').toLowerCase();
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [ratingInput, setRatingInput] = useState('');
+
   const [hasSearched, setHasSearched] = useState(false);
-  const username = (user?.email || user?.name || user?.username || 'anonymous').toLowerCase();
-  const [showThanks, setShowThanks] = useState(false);
+
+
+
+  const [ratingInput, setRatingInput] = useState('');
 
   const [searchedSong, setSearchedSong] = useState(() => {
     return songs.find(s => s.title === 'Would That I') ?? songs[0] ?? null;
