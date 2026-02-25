@@ -1,13 +1,24 @@
 import React from 'react';
 import './charts.css';
 
-export function Charts({ songs }) {
+export function Charts({ songs, notifications }) {
   function getGlobalRating(song) {
     const ratings = Object.values(song.ratingsByUser ?? {});
     if (ratings.length === 0) return null;
     const avg = ratings.reduce((sum, r) => sum + r, 0) / ratings.length;
     return Math.round(avg * 10) / 10;
   }
+
+  const mockNotifications = [
+    { id: 1, text: 'Madi rated "Cursed" (4)', time: '4:12 PM' },
+    { id: 2, text: 'Alex rated "Fool for Love" (5)', time: '4:05 PM' },
+    { id: 3, text: 'Jo rated "Would That I" (3)', time: '3:58 PM' },
+  ];
+
+  const displayNotifications =
+    (notifications?.length ?? 0) > 0
+      ? notifications
+      : mockNotifications;
 
   const rankedSongs = [...songs]
     .map(song => ({
@@ -20,13 +31,17 @@ export function Charts({ songs }) {
   const topSong = rankedSongs[0] ?? null;
 
 
+
   return (
     <main className="container-fluid text-center min-vh-100 py-4">
       <div>
         <div className="alert alert-info" role="alert">
           <ul className="notification">
-            <li className="player-name">Mary rated a new song</li>
-            <li className="player-name">Jim rated a new song</li>
+            {displayNotifications.map(n => (
+              <li key={n.id} className="player-name">
+                {n.text} <span className="text-muted">({n.time})</span>
+              </li>
+            ))}
           </ul>
         </div>
 
