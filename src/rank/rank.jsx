@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './rank.css';
 
 export function Rank({ songs, setSongs, user }) {
@@ -8,6 +8,7 @@ export function Rank({ songs, setSongs, user }) {
   const [ratingInput, setRatingInput] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
   const username = user?.name || user?.username || 'anonymous';
+  const [showThanks, setShowThanks] = useState(false);
 
   const [searchedSong, setSearchedSong] = useState(() => {
     return songs.find(s => s.title === 'Would That I') ?? songs[0] ?? null;
@@ -15,6 +16,7 @@ export function Rank({ songs, setSongs, user }) {
 
   function handleSearch(e) {
     e.preventDefault();
+    setShowThanks(false);
     const q = searchQuery.trim().toLowerCase();
     if (!q) return;
 
@@ -47,10 +49,19 @@ export function Rank({ songs, setSongs, user }) {
     setRatingInput('');
     setHasSearched(false);
     setSearchQuery('');
+    setShowThanks(true);
+
     setSearchedSong(
       songs.find(s => s.title === 'Would That I') ?? songs[0]
     )
+
   }
+
+  useEffect(() => {
+    if (!showThanks) return;
+    const t = setTimeout(() => setShowThanks(false), 3000); 
+    return () => clearTimeout(t);
+  }, [showThanks]);
 
   return (
     <main className="container-fluid text-center min-vh-100 py-4">
@@ -87,6 +98,13 @@ export function Rank({ songs, setSongs, user }) {
             </div>
           </>
         )}
+
+        {showThanks && (
+          <div className="alert alert-success mt-3" role="alert">
+            Thank you for ranking!
+          </div>
+        )}
+
       </div>
     </main>
   );
