@@ -44,15 +44,12 @@ export function Rank({ songs, setSongs, user }) {
           : song
       )
     );
-
-    setSearchedSong(prev => ({
-      ...prev,
-      ratingsByUser: {
-        ...(prev.ratingsByUser ?? {}),
-        [username]: ratingNumber,
-      },
-    }));
     setRatingInput('');
+    setHasSearched(false);
+    setSearchQuery('');
+    setSearchedSong(
+      songs.find(s => s.title === 'Would That I') ?? songs[0]
+    )
   }
 
   return (
