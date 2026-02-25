@@ -70,17 +70,19 @@ export function Rank() {
             />
 
             <div className="d-flex justify-content-center align-items-center gap-3 mt-3">
-              <label htmlFor="ratingInput">Rank song: </label>
+              <label htmlFor="ratingInput">Rank song:</label>
               <select id="ratingInput" className="form-select" style={{ maxWidth: 140 }} value={ratingInput} onChange={(e) => setRatingInput(e.target.value)}>
                 <option value="" disabled>Select</option>
-                {[...Array(9)].map((_, i) => {
-                  const val = (i + 2) / 2;
-                  return (
-                    <option key={val} value={val}>
-                      {val}
-                    </option>
-                  );
-                })}
+                <option value="0.5">0.5</option>
+                <option value="1">1</option>
+                <option value="1.5">1.5</option>
+                <option value="2">2</option>
+                <option value="2.5">2.5</option>
+                <option value="3">3</option>
+                <option value="3.5">3.5</option>
+                <option value="4">4</option>
+                <option value="4.5">4.5</option>
+                <option value="5">5</option>
               </select>
               <button type="button" className="btn btn-submit">Submit Rating</button>
             </div>

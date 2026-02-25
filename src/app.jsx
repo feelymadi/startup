@@ -18,6 +18,22 @@ export default function App() {
   // current user
   const [user, setUser] = useState(null);
 
+  // global song storage
+  const SONGS_KEY = 'tunechart_songs';
+  const [songs, setSongs] = useState(loadSongs);
+
+  // load songs
+  function loadSongs() {
+    const saved = localStorage.getItem(SONGS_KEY);
+    return saved
+      ? JSON.parse(saved)
+      : [
+        { id: 1, title: 'Cursed', artist: 'Lord Huron', rating: 4.7, image: 'albumcoverexample.png' },
+        { id: 2, title: 'Would That I', artist: 'Hozier', rating: 4.4, image: 'albumExampleHozier.png' },
+        { id: 3, title: 'Fool for Love', artist: 'Lord Huron', rating: 4.7, image: 'albumcoverexample.png' },
+      ];
+  }
+
   // restore stored user if has one
   useEffect(() => {
     const savedUser = localStorage.getItem('tunechart:user');
@@ -35,6 +51,14 @@ export default function App() {
     }
   }, [user]);
 
+  useEffect(() => {
+    localStorage.setItem(SONGS_KEY, JSON.stringify(songs));
+  }, [songs]);
+
+
+
+
+
 
   return (
     <BrowserRouter>
@@ -43,15 +67,7 @@ export default function App() {
           <nav className="navbar navbar-expand-md fixed-top navbar-light">
             <div className="container-fluid">
               <div className="navbar-brand">TuneChart<sup>&reg;</sup></div>
-              <button
-                className="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#mainNav"
-                aria-controls="mainNav"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
+              <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
               </button>
               <div className="collapse navbar-collapse" id="mainNav">
@@ -111,7 +127,13 @@ export default function App() {
             {/* protected routes */}
             <Route path="/charts" element={user ? <Charts user={user} /> : <Login user={user} onLogin={setUser} />} />
             <Route path="/profile" element={user ? <Profile user={user} /> : <Login user={user} onLogin={setUser} />} />
-            <Route path="/rank" element={user ? <Rank user={user} /> : <Login user={user} onLogin={setUser} />} />
+            <Route path="/rank"
+              element={
+                user ? (
+                  <Rank user={user} songs={songs} setSongs={setSongs} />
+                ) : (
+                  <Login user={user} onLogin={setUser} />
+                )}/>
             <Route path="*" element={<NotFound />} />
 
           </Routes>
