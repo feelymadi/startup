@@ -105,8 +105,10 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - I completed this part of the deliverable.
+      I used React to make my startup site functional. I mocked up future third party calls using setInterval and useEffect. The backbone of this was creating a global variable to store the songs data and ratings then it was just a matter of displaying it in different ways across the site. Using local storage also means that data remains even when refreshed. I also decieded to have the all time chart update automatically based on ratings. 
+- [x] **Hooks** - I completed this part of the deliverable.
+      I used useState when adding functionality to search inputs, notifications and conditional rendering. The conditional rendering was my favorite part like for the rank a song page. I stored the song data in app.jsx to keep it the same everywhere. Lastly I used useEffect for intervals in mock notifications and rating submisison confirmation. 
 
 ## 🚀 Service deliverable
 
