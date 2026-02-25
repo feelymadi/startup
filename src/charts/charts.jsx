@@ -53,24 +53,14 @@ export function Charts({ songs }) {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Cursed</td>
-              <td>Lord Huron</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Would that I</td>
-              <td>Hozier</td>
-              <td>4.8</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Cleopatra</td>
-              <td>The Lumineers</td>
-              <td>4.5</td>
-            </tr>
+            {rankedSongs.map((song, i) => (
+              <tr key={song.id}>
+                <td>{i + 1}</td>
+                <td>{song.title}</td>
+                <td>{song.artist}</td>
+                <td>{song.globalRating}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
