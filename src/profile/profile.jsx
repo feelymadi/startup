@@ -1,7 +1,7 @@
 import React from 'react';
 import './profile.css';
 
-export function Profile() {
+export function Profile({ songs, user }) {
   return (
     <main className="container-fluid text-center min-vh-100 py-4">      <div>
         <h1>Profile</h1>
