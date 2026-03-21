@@ -44,6 +44,7 @@ export function Rank({ songs, setSongs, user }) {
       songId: searchedSong.id,
       title: searchedSong.title,
       artist: searchedSong.artist,
+      image: searchedSong.image || '/albumcoverexample.png',
       username: username,
       rating: ratingNumber,
     };
@@ -173,7 +174,7 @@ export function Rank({ songs, setSongs, user }) {
         {hasSearched && searchedSong && (
           <>
             <h2>{searchedSong.title} : {searchedSong.artist}</h2>
-            <img alt="albumPhoto" src={searchedSong.image} width="300" className="album-cover" />
+            <img alt="albumPhoto" src={searchedSong.image || '/albumcoverexample.png'} width="300" className="album-cover" />
             <div className="d-flex justify-content-center align-items-center gap-3 mt-3">
               <label htmlFor="ratingInput">Rank song:</label>
               <select id="ratingInput" className="form-select" style={{ maxWidth: 140 }} value={ratingInput} onChange={(e) => setRatingInput(e.target.value)}>
