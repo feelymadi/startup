@@ -67,13 +67,22 @@ app.get('/api/searchSongs', async (req, res) => {
 
         const data = await response.json();
 
-        const songs = (data.recordings || []).map((recording) => ({
-            id: recording.id,
-            title: recording.title,
-            artist:
-                recording['artist-credit']?.map((a) => a.name).join(', ') || 'Unknown',
-            length: recording.length || null,
-        }));
+        const songs = (data.recordings || []).map((recording) => {
+
+            const releaseId = recording.releases?.[0]?.id;
+
+            const image = releaseId
+                ? `https://coverartarchive.org/release/${releaseId}/front-250`
+                : null;
+
+            return {
+                id: recording.id,
+                title: recording.title,
+                artist:
+                    recording['artist-credit']?.map((a) => a.name).join(', ') || 'Unknown',
+                image,
+            };
+        });
 
         res.send(songs);
     } catch (error) {

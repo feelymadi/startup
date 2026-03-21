@@ -49,13 +49,22 @@ export function Rank({ songs, setSongs, user }) {
     };
 
     // post request
-    await fetch('/api/rankings', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(ranking),
-    });
+    try {
+      const response = await fetch('/api/rankings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(ranking),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save ranking');
+      }
+    } catch (error) {
+      console.error('Ranking save error:', error);
+      return;
+    }
 
     setSongs(prev => {
 
