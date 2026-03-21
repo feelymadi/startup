@@ -5,6 +5,8 @@ const app = express();
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
+let chartSongs = [];
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static('public'));
@@ -79,6 +81,16 @@ app.get('/api/searchSongs', async (req, res) => {
   }
 });
 
+app.get('/api/chart', (req, res) => {
+  res.send(chartSongs);
+});
+
+app.post('/api/chart', (req, res) => {
+  chartSongs.push(req.body);
+  res.send({ success: true });
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+

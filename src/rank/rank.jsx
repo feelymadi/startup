@@ -8,24 +8,22 @@ export function Rank({ songs, setSongs, user }) {
 
   // variables for searching
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
-  const [searchedSong, setSearchedSong] = useState(() => {
-    return songs.find(s => s.title === 'Would That I') ?? songs[0] ?? null;
-  });
+  const [searchedSong, setSearchedSong] = useState(null);
 
   // search function 
-  function handleSearch(e) {
+  async function handleSearch(e) {
     e.preventDefault();
     setShowThanks(false);
-    const q = searchQuery.trim().toLowerCase();
+    const q = searchQuery.trim();
     if (!q) return;
 
-    const found = songs.find(song =>
-      song.title.toLowerCase().includes(q) ||
-      song.artist.toLowerCase().includes(q)
-    );
+    const response = await fetch(`/api/searchSongs?q=${encodeURIComponent(q)}`);
+    const data = await response.json();
 
-    setSearchedSong(found || songs.find(s => s.title === 'Would That I'));
+    setSearchResults(data);
+    setSearchedSong(data[0] ?? null);
     setHasSearched(true);
   }
 
@@ -34,30 +32,57 @@ export function Rank({ songs, setSongs, user }) {
 
   // rating function
   function handleSubmitRating() {
+    
+    // catch
+    if (!searchedSong) return;
+
     const ratingNumber = Number(ratingInput);
     if (!Number.isFinite(ratingNumber) || ratingNumber < 0.5 || ratingNumber > 5) return;
 
-    setSongs(prev =>
-      prev.map(song =>
-        song.id === searchedSong.id
-          ? {
-            ...song,
-            ratingsByUser: {
-              ...(song.ratingsByUser ?? {}),
-              [username]: ratingNumber,
-            },
-          }
-          : song
-      )
-    );
+
+    setSongs(prev => {
+
+      // already have?
+      const existing = prev.find(
+        song => song.id === searchedSong.id
+      );
+
+      // song already exists (update)
+      if (existing) {
+        return prev.map(song =>
+          song.id === searchedSong.id
+            ? {
+              ...song,
+              ratingsByUser: {
+                ...(song.ratingsByUser ?? {}),
+                [username]: ratingNumber,
+              },
+            }
+            : song
+        );
+      }
+
+      // brand new song (add)
+      return [
+        ...prev,
+        {
+          ...searchedSong,
+          image: searchedSong.image || '/albumcoverexample.png',
+          ratingsByUser: {
+            [username]: ratingNumber,
+          },
+        },
+      ];
+
+    });
+
+    // reset
     setRatingInput('');
     setHasSearched(false);
     setSearchQuery('');
     setShowThanks(true);
-
-    setSearchedSong(
-      songs.find(s => s.title === 'Would That I') ?? songs[0]
-    )
+    setSearchedSong(null);
+    setSearchResults([]);
 
   }
 
