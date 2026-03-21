@@ -1,29 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 export default function App() {
-  const [songs, setSongs] = useState([]);
-  const [error, setError] = useState('');
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
 
-  useEffect(() => {
-    fetch('/api/songs')
-      .then(res => res.json())
-      .then(data => setSongs(data))
-      .catch(() => setError('Failed to load songs'));
-  }, []);
+  const searchSongs = async () => {
+    const res = await fetch(`/api/searchSongs?q=${query}`);
+    const data = await res.json();
+    setResults(data);
+  };
 
   return (
-    <div style={{ padding: '30px' }}>
+    <div style={{ padding: 30 }}>
       <h1>TuneChart</h1>
 
-      {error && <p>{error}</p>}
+      <input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search songs..."
+      />
 
-      <ul>
-        {songs.map(song => (
-          <li key={song.id}>
-            #{song.ranking} {song.title} — {song.artist} ({song.album})
-          </li>
-        ))}
-      </ul>
+      <button onClick={searchSongs}>
+        Search
+      </button>
+
+<ul>
+  {results.map(song => (
+    <li key={song.id}>
+      {song.title} — {song.artist}
+      <button onClick={() => addSong(song)}>
+        Add
+      </button>
+    </li>
+  ))}
+</ul>
     </div>
   );
 }
