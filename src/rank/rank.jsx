@@ -23,8 +23,8 @@ export function Rank({ songs, setSongs, user }) {
     const data = await response.json();
 
     setSearchResults(data);
-    setSearchedSong(data[0] ?? null);
-    setHasSearched(true);
+    setSearchedSong(null);
+    setHasSearched(false);
   }
 
   // variable for rating
@@ -32,7 +32,7 @@ export function Rank({ songs, setSongs, user }) {
 
   // rating function
   function handleSubmitRating() {
-    
+
     // catch
     if (!searchedSong) return;
 
@@ -110,6 +110,38 @@ export function Rank({ songs, setSongs, user }) {
             <button type="submit" className="btn btn-search">Search for Song</button>
           </div>
         </form>
+
+        {searchResults.length > 0 && (
+          <div className="mt-4">
+            <h2>Select a song</h2>
+
+            <ul className="list-unstyled">
+              {searchResults.map(song => (
+                <li key={song.id} className="mb-2">
+
+                  {song.title} — {song.artist}
+
+                  <button
+                    type="button"
+                    className="btn btn-search ms-2"
+                    onClick={() => {
+                      setSearchedSong(song);
+                      setHasSearched(true);
+                    }}
+                  >
+                    Select
+                  </button>
+
+                </li>
+              ))}
+            </ul>
+
+          </div>
+        )}
+
+        {searchResults.length === 0 && hasSearched === false && searchQuery !== '' && (
+          <p className="mt-3">No results found.</p>
+        )}
 
         {/* show after song is search (show result) */}
         {hasSearched && searchedSong && (
