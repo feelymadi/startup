@@ -31,7 +31,7 @@ export function Rank({ songs, setSongs, user }) {
   const [ratingInput, setRatingInput] = useState('');
 
   // rating function
-  function handleSubmitRating() {
+  async function handleSubmitRating() {
 
     // catch
     if (!searchedSong) return;
@@ -39,6 +39,23 @@ export function Rank({ songs, setSongs, user }) {
     const ratingNumber = Number(ratingInput);
     if (!Number.isFinite(ratingNumber) || ratingNumber < 0.5 || ratingNumber > 5) return;
 
+    // structure
+    const ranking = {
+      songId: searchedSong.id,
+      title: searchedSong.title,
+      artist: searchedSong.artist,
+      username: username,
+      rating: ratingNumber,
+    };
+
+    // post request
+    await fetch('/api/rankings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(ranking),
+    });
 
     setSongs(prev => {
 
