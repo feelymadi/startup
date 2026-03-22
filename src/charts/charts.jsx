@@ -8,7 +8,9 @@ export function Charts({ notifications }) {
 
   useEffect(() => {
     async function loadRankings() {
-      const response = await fetch('/api/rankings');
+      const response = await fetch('/api/rankings', {
+        credentials: 'include',
+      });
       const data = await response.json();
       setRankings(data);
     }
