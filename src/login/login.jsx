@@ -5,9 +5,10 @@ export function Login({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [error, setError] = useState('');
 
-    // if an email is submitted navigate to profile
-  function handleSubmit(e) {
+  // if an email is submitted navigate to profile
+  async function handleSubmit(e) {
     e.preventDefault();
     if (email.trim() !== '') {
       onLogin({ email });
@@ -15,7 +16,7 @@ export function Login({ onLogin }) {
     }
   }
 
-    // same as submit but for create button
+  // same as submit but for create button
   function handleCreate() {
     if (email.trim() !== '') {
       onLogin({ email });
