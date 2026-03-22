@@ -43,52 +43,41 @@ app.get('/api/songs', (req, res) => {
 });
 
 app.get('/api/searchSongs', async (req, res) => {
-    try {
-        const query = req.query.q;
+  try {
+    const query = req.query.q;
 
-        if (!query) {
-            return res.status(400).send({ error: 'Missing query parameter q' });
-        }
-
-        const url = `https://musicbrainz.org/ws/2/recording?query=${encodeURIComponent(query)}&fmt=json&limit=10`;
-
-        const response = await fetch(url, {
-            headers: {
-                'User-Agent': 'TuneChart/1.0 (madilynnhr.com)',
-                Accept: 'application/json',
-            },
-        });
-
-        if (!response.ok) {
-            const text = await response.text();
-            console.log('MusicBrainz bad response:', response.status, text);
-            return res.status(response.status).send({ error: 'MusicBrainz request failed' });
-        }
-
-        const data = await response.json();
-
-        const songs = (data.recordings || []).map((recording) => {
-
-            const releaseId = recording.releases?.[0]?.id;
-
-            const image = releaseId
-                ? `https://coverartarchive.org/release/${releaseId}/front-250`
-                : null;
-
-            return {
-                id: recording.id,
-                title: recording.title,
-                artist:
-                    recording['artist-credit']?.map((a) => a.name).join(', ') || 'Unknown',
-                image,
-            };
-        });
-
-        res.send(songs);
-    } catch (error) {
-        console.log('SearchSongs error:', error);
-        res.status(500).send({ error: 'Server error while searching songs' });
+    if (!query) {
+      return res.status(400).send({ error: 'Missing query parameter q' });
     }
+
+    const url = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&entity=song&limit=10`;
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      const text = await response.text();
+      console.log('iTunes bad response:', response.status, text);
+      return res.status(response.status).send({ error: 'iTunes request failed' });
+    }
+
+    const data = await response.json();
+
+    const songs = (data.results || []).map((song) => ({
+      id: song.trackId,
+      title: song.trackName,
+      artist: song.artistName,
+      album: song.collectionName,
+      image: song.artworkUrl100
+        ? song.artworkUrl100.replace('100x100', '300x300')
+        : null,
+      preview: song.previewUrl || null,
+    }));
+
+    res.send(songs);
+  } catch (error) {
+    console.log('SearchSongs error:', error);
+    res.status(500).send({ error: 'Server error while searching songs' });
+  }
 });
 
 app.get('/api/chart', (req, res) => {
@@ -101,8 +90,7 @@ app.post('/api/chart', (req, res) => {
 });
 
 app.post('/api/rankings', (req, res) => {
-    const { songId, title, artist, username, rating } = req.body;
-
+    const { songId, title, artist, image, username, rating } = req.body;
     if (!songId || !title || !artist || !username || rating === undefined) {
         return res.status(400).send({ error: 'Missing ranking data' });
     }
@@ -111,6 +99,7 @@ app.post('/api/rankings', (req, res) => {
         songId,
         title,
         artist,
+        image,
         username,
         rating,
     });
