@@ -56,6 +56,7 @@ export function Rank({ songs, setSongs, user }) {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify(ranking),
       });
 
