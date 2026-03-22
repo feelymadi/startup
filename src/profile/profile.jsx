@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './profile.css';
 
 export function Profile({ user }) {
@@ -9,15 +10,16 @@ export function Profile({ user }) {
   const [rankings, setRankings] = useState([]);
 
   // load songs
-  useEffect(() => {
-    async function loadRankings() {
-      const response = await fetch('/api/rankings');
-      const data = await response.json();
-      setRankings(data);
-    }
-
-    loadRankings();
-  }, []);
+useEffect(() => {
+  async function loadRankings() {
+    const response = await fetch('/api/rankings', {
+      credentials: 'include',
+    });
+    const data = await response.json();
+    setRankings(data);
+  }
+  loadRankings();
+}, []);
 
   // compile user's ranked songs
   const rankedSongs = rankings
@@ -72,7 +74,7 @@ export function Profile({ user }) {
         ) : (
           <p className="mt-3">Rate songs in the Rank tab to build your profile chart.</p>
         )}
-        <a href="/rank" className="btn">Rank New Song</a>
+        <Link to="/rank" className="btn">Rank New Song</Link>
       </div>
     </main>
   );
