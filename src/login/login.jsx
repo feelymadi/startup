@@ -9,6 +9,11 @@ export function Login({ onLogin }) {
 
   // if an email is submitted navigate to profile
   async function handleSubmit(e) {
+    if (!email || !password) {
+      setError('Enter email and password');
+      return;
+    }
+    
     e.preventDefault();
     setError('');
 
@@ -37,6 +42,10 @@ export function Login({ onLogin }) {
 
   // same as submit but for create button
   async function handleCreate() {
+    if (!email || !password) {
+      setError('Enter email and password');
+      return;
+    }
     setError('');
 
     const response = await fetch('/api/auth/create', {

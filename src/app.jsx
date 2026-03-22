@@ -14,6 +14,20 @@ export default function App() {
   // current user
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    async function restoreSession() {
+      const response = await fetch('/api/auth/me', {
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data);
+      }
+    }
+    restoreSession();
+  }, []);
+
   // notification
   const [notifications, setNotifications] = useState([]);
   function addNotification(text) {
@@ -65,23 +79,6 @@ export default function App() {
         },
       ];
   }
-
-  // restore stored user if has one
-  useEffect(() => {
-    const savedUser = localStorage.getItem('tunechart:user');
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-  }, []);
-
-  // updates local storage when logout
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem('tunechart:user', JSON.stringify(user));
-    } else {
-      localStorage.removeItem('tunechart:user');
-    }
-  }, [user]);
 
   useEffect(() => {
     localStorage.setItem(SONGS_KEY, JSON.stringify(songs));
@@ -139,7 +136,13 @@ export default function App() {
                   <p>You are signed in as {user.email}</p>
                   <button
                     className="btn btn-outline-dark mt-3"
-                    onClick={() => setUser(null)}
+                    onClick={async () => {
+                      await fetch('/api/auth/logout', {
+                        method: 'DELETE',
+                        credentials: 'include',
+                      });
+                      setUser(null);
+                    }}
                   >
                     Logout
                   </button>
@@ -152,12 +155,12 @@ export default function App() {
             <Route path="/about" element={<About />} />
             {/* protected routes */}
             <Route path="/charts" element={user ? <Charts notifications={notifications} /> : <Login user={user} onLogin={setUser} />} />
-            <Route path="/profile" element={user ? <Profile user={user} /> : <Login user={user} onLogin={setUser} />} />            
+            <Route path="/profile" element={user ? <Profile user={user} /> : <Login user={user} onLogin={setUser} />} />
             <Route path="/rank" element={user ? <Rank user={user} songs={songs} setSongs={setSongs} /> : <Login user={user} onLogin={setUser} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
-        
+
         <footer className="container-fluid">
           <span className="text-reset">Author: Madilynn Feely </span>
           <a href="https://github.com/feelymadi">GitHub</a>
