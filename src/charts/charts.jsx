@@ -1,14 +1,55 @@
 import React, { useEffect, useState } from 'react';
 import './charts.css';
 
-export function Charts({ songs, notifications }) {
-  // calculating overall rating
-  function getGlobalRating(song) {
-    const ratings = Object.values(song.ratingsByUser ?? {});
-    if (ratings.length === 0) return null;
-    const avg = ratings.reduce((sum, r) => sum + r, 0) / ratings.length;
-    return Math.round(avg * 10) / 10;
-  }
+export function Charts({ notifications }) {
+
+  // rankings 
+  const [rankings, setRankings] = useState([]);
+
+  useEffect(() => {
+    async function loadRankings() {
+      const response = await fetch('/api/rankings');
+      const data = await response.json();
+      setRankings(data);
+    }
+
+    loadRankings();
+  }, []);
+
+  // compile ranked songs across users
+  const groupedSongs = Object.values(
+    rankings.reduce((acc, ranking) => {
+      const key = ranking.songId;
+
+      if (!acc[key]) {
+        acc[key] = {
+          songId: ranking.songId,
+          title: ranking.title,
+          artist: ranking.artist,
+          image: ranking.image,
+          ratings: [],
+        };
+      }
+
+      acc[key].ratings.push(ranking.rating);
+      return acc;
+    }, {})
+  );
+
+  const rankedSongs = groupedSongs
+    .map((song) => {
+      const avg =
+        song.ratings.reduce((sum, rating) => sum + rating, 0) / song.ratings.length;
+
+      return {
+        ...song,
+        globalRating: Math.round(avg * 10) / 10,
+      };
+    })
+    .sort((a, b) => b.globalRating - a.globalRating);
+
+  // top song
+  const topSong = rankedSongs[0] ?? null;
 
   // notification functionality and mock up
   const [liveMocks, setLiveMocks] = useState([]);
@@ -17,9 +58,18 @@ export function Charts({ songs, notifications }) {
 
   // compile random notifications
   function generateRandomNotification() {
+    if (rankedSongs.length === 0) {
+      return {
+        id: crypto.randomUUID(),
+        text: 'No song activity yet',
+        time: new Date().toLocaleTimeString(),
+      };
+    }
+
     const randomUser = mockUsers[Math.floor(Math.random() * mockUsers.length)];
-    const randomSong = songs[Math.floor(Math.random() * songs.length)];
+    const randomSong = rankedSongs[Math.floor(Math.random() * rankedSongs.length)];
     const randomRating = mockRatings[Math.floor(Math.random() * mockRatings.length)];
+
     return {
       id: crypto.randomUUID(),
       text: `${randomUser} rated "${randomSong?.title}" (${randomRating})`,
@@ -36,24 +86,13 @@ export function Charts({ songs, notifications }) {
       ].slice(0, 5));
     }, 3000);
     return () => clearInterval(interval);
-  }, [songs]);
+  }, [rankings.length]);
 
   const displayNotifications =
     (notifications?.length ?? 0) > 0
       ? notifications
       : liveMocks;
 
-  // compile ranked songs across users
-  const rankedSongs = [...songs]
-    .map(song => ({
-      ...song,
-      globalRating: getGlobalRating(song),
-    }))
-    .filter(song => song.globalRating != null)
-    .sort((a, b) => b.globalRating - a.globalRating);
-
-  // catch for no songs ranked
-  const topSong = rankedSongs[0] ?? null;
 
   return (
     <main className="container-fluid text-center min-vh-100 py-4">
@@ -76,7 +115,7 @@ export function Charts({ songs, notifications }) {
         {topSong ? (
           <>
             <h2><span id="topTitle">{topSong.title}</span> :{' '}<span id="topArtist">{topSong.artist}</span></h2>
-            <img alt="albumPhoto" src={topSong.image} width="300" className="album-cover" />
+            <img alt="albumPhoto" src={topSong.image || '/albumcoverexample.png'} width="300" className="album-cover" />
           </>
         ) : (
           <p>No songs have been rated yet :/</p>
@@ -98,7 +137,7 @@ export function Charts({ songs, notifications }) {
             <tbody>
               {/* compiles table based off of all time rankings  */}
               {rankedSongs.map((song, i) => (
-                <tr key={song.id}>
+                <tr key={song.songId}>
                   <td>{i + 1}</td>
                   <td>{song.title}</td>
                   <td>{song.artist}</td>

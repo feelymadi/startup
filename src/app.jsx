@@ -151,7 +151,7 @@ export default function App() {
             />
             <Route path="/about" element={<About />} />
             {/* protected routes */}
-            <Route path="/charts" element={user ? <Charts user={user} songs={songs} notifications={notifications} /> : <Login user={user} onLogin={setUser} />} />
+            <Route path="/charts" element={user ? <Charts notifications={notifications} /> : <Login user={user} onLogin={setUser} />} />
             <Route path="/profile" element={user ? <Profile user={user} /> : <Login user={user} onLogin={setUser} />} />            <Route path="/rank" element={user ? <Rank user={user} songs={songs} setSongs={setSongs} /> : <Login user={user} onLogin={setUser} />} />
             <Route path="*" element={<NotFound />} />
 
