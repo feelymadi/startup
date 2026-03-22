@@ -10,23 +10,62 @@ export function Login({ onLogin }) {
   // if an email is submitted navigate to profile
   async function handleSubmit(e) {
     e.preventDefault();
-    if (email.trim() !== '') {
-      onLogin({ email });
-      navigate('/profile');
+    setError('');
+
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      setError(data.error || 'Login failed');
+      return;
     }
+
+    onLogin(data);
+    navigate('/profile');
   }
 
   // same as submit but for create button
-  function handleCreate() {
-    if (email.trim() !== '') {
-      onLogin({ email });
-      navigate('/profile');
+  async function handleCreate() {
+    setError('');
+
+    const response = await fetch('/api/auth/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      setError(data.error || 'Account creation failed');
+      return;
     }
+
+    onLogin(data);
+    navigate('/profile');
   }
 
   return (
     <main className="container-fluid text-center py-4">
       <h1>Welcome to TuneChart</h1>
+      {error && <p className="text-danger">{error}</p>}
       <form
         className="p-4 border rounded shadow-sm mx-auto" style={{ maxWidth: '400px' }} onSubmit={handleSubmit}
       >
