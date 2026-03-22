@@ -16,68 +16,42 @@ app.get('/api/hello', (req, res) => {
     res.send({ message: 'Hello from TuneChart backend!' });
 });
 
-app.get('/api/songs', (req, res) => {
-    res.send([
-        {
-            id: 1,
-            title: 'Cherry Wine',
-            artist: 'Hozier',
-            album: 'Hozier',
-            ranking: 1,
-        },
-        {
-            id: 2,
-            title: 'The Night We Met',
-            artist: 'Lord Huron',
-            album: 'Strange Trails',
-            ranking: 2,
-        },
-        {
-            id: 3,
-            title: 'Work Song',
-            artist: 'Hozier',
-            album: 'Hozier',
-            ranking: 3,
-        },
-    ]);
-});
-
 app.get('/api/searchSongs', async (req, res) => {
-  try {
-    const query = req.query.q;
+    try {
+        const query = req.query.q;
 
-    if (!query) {
-      return res.status(400).send({ error: 'Missing query parameter q' });
+        if (!query) {
+            return res.status(400).send({ error: 'Missing query parameter q' });
+        }
+
+        const url = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&entity=song&limit=10`;
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            const text = await response.text();
+            console.log('iTunes bad response:', response.status, text);
+            return res.status(response.status).send({ error: 'iTunes request failed' });
+        }
+
+        const data = await response.json();
+
+        const songs = (data.results || []).map((song) => ({
+            id: song.trackId,
+            title: song.trackName,
+            artist: song.artistName,
+            album: song.collectionName,
+            image: song.artworkUrl100
+                ? song.artworkUrl100.replace('100x100', '300x300')
+                : null,
+            preview: song.previewUrl || null,
+        }));
+
+        res.send(songs);
+    } catch (error) {
+        console.log('SearchSongs error:', error);
+        res.status(500).send({ error: 'Server error while searching songs' });
     }
-
-    const url = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&entity=song&limit=10`;
-
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      const text = await response.text();
-      console.log('iTunes bad response:', response.status, text);
-      return res.status(response.status).send({ error: 'iTunes request failed' });
-    }
-
-    const data = await response.json();
-
-    const songs = (data.results || []).map((song) => ({
-      id: song.trackId,
-      title: song.trackName,
-      artist: song.artistName,
-      album: song.collectionName,
-      image: song.artworkUrl100
-        ? song.artworkUrl100.replace('100x100', '300x300')
-        : null,
-      preview: song.previewUrl || null,
-    }));
-
-    res.send(songs);
-  } catch (error) {
-    console.log('SearchSongs error:', error);
-    res.status(500).send({ error: 'Server error while searching songs' });
-  }
 });
 
 app.get('/api/chart', (req, res) => {

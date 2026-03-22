@@ -152,11 +152,12 @@ export default function App() {
             <Route path="/about" element={<About />} />
             {/* protected routes */}
             <Route path="/charts" element={user ? <Charts notifications={notifications} /> : <Login user={user} onLogin={setUser} />} />
-            <Route path="/profile" element={user ? <Profile user={user} /> : <Login user={user} onLogin={setUser} />} />            <Route path="/rank" element={user ? <Rank user={user} songs={songs} setSongs={setSongs} /> : <Login user={user} onLogin={setUser} />} />
+            <Route path="/profile" element={user ? <Profile user={user} /> : <Login user={user} onLogin={setUser} />} />            
+            <Route path="/rank" element={user ? <Rank user={user} songs={songs} setSongs={setSongs} /> : <Login user={user} onLogin={setUser} />} />
             <Route path="*" element={<NotFound />} />
-
           </Routes>
         </main>
+        
         <footer className="container-fluid">
           <span className="text-reset">Author: Madilynn Feely </span>
           <a href="https://github.com/feelymadi">GitHub</a>
