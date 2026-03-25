@@ -1,11 +1,19 @@
+// libraries 
+
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const bcrypt = require('bcryptjs');
+const { v4: uuidv4 } = require('uuid');
+
+// DB setup
 const { MongoClient } = require('mongodb');
 const config = require('./dbConfig.json');
-
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
 const db = client.db('tuneChart');
 const userCollection = db.collection('user');
 const rankingCollection = db.collection('ranking');
+
 
 // catch for bad mongo connection
 (async function testConnection() {
@@ -18,14 +26,8 @@ const rankingCollection = db.collection('ranking');
   }
 })();
 
-
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const bcrypt = require('bcryptjs');
-const { v4: uuidv4 } = require('uuid');
-
+// server setup
 const app = express();
-
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 let chartSongs = [];
