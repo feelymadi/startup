@@ -131,8 +131,10 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
+- [x] **Stores data in MongoDB** - I completed this part of the deliverable.
+      Song rankings are now stored in a ranking collection in MongoDB. When a user submits a rating, the backend inserts a document containing the song information, rating value, username, and timestamp. Rankings are loaded from MongoDB when the user refreshes the page, demonstrating that the data persists after server restarts and deployments.
+- [x] **Stores credentials in MongoDB** - I completed this part of the deliverable.
+      User accounts are now stored in a user collection. During signup, the server hashes the password using bcrypt and inserts the user document into MongoDB. During login, the backend queries MongoDB to validate the user’s credentials instead of checking an in-memory array. This allows authentication to persist across sessions.
 
 ## 🚀 WebSocket deliverable
 
