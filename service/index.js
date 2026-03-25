@@ -30,9 +30,6 @@ const rankingCollection = db.collection('ranking');
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
-let chartSongs = [];
-let sessions = {};
-
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static('public'));
@@ -45,10 +42,21 @@ function setAuthCookie(res, token) {
     });
 }
 
+// in memory storage
+let chartSongs = [];
+let sessions = {};
+
+// debugger
 app.get('/api/hello', (req, res) => {
     res.send({ message: 'Hello from TuneChart backend!' });
 });
 
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
+
+
+// SONG SEARCH API CALL
 app.get('/api/searchSongs', async (req, res) => {
     try {
         const query = req.query.q;
@@ -87,6 +95,7 @@ app.get('/api/searchSongs', async (req, res) => {
     }
 });
 
+// CHARTS
 app.get('/api/chart', (req, res) => {
     res.send(chartSongs);
 });
@@ -96,6 +105,7 @@ app.post('/api/chart', (req, res) => {
     res.send({ success: true });
 });
 
+// RANKINGS
 app.post('/api/rankings', verifyAuth, async (req, res) => {
 
     // song
@@ -121,6 +131,17 @@ app.post('/api/rankings', verifyAuth, async (req, res) => {
     res.send({ success: true });
 });
 
+app.get('/api/rankings', verifyAuth, async (req, res) => {
+    // load user rankings from mongo
+    const rankings = await rankingCollection
+        .find({ username: req.userEmail.toLowerCase() })
+        .sort({ createdAt: -1 })
+        .toArray();
+
+    res.send(rankings);
+});
+
+// LOGIN HANDLING
 app.post('/api/auth/create', async (req, res) => {
     const { email, password } = req.body;
 
@@ -202,17 +223,5 @@ app.get('/api/auth/me', verifyAuth, (req, res) => {
     res.send({ email: req.userEmail });
 });
 
-app.get('/api/rankings', verifyAuth, async (req, res) => {
-    // load user rankings from mongo
-    const rankings = await rankingCollection
-        .find({ username: req.userEmail.toLowerCase() })
-        .sort({ createdAt: -1 })
-        .toArray();
 
-    res.send(rankings);
-});
-
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
 
