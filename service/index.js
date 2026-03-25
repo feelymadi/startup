@@ -94,22 +94,28 @@ app.post('/api/chart', (req, res) => {
     res.send({ success: true });
 });
 
-app.post('/api/rankings', verifyAuth, (req, res) => {
+app.post('/api/rankings', verifyAuth, async (req, res) => {
+
+    // song
     const { songId, title, artist, image, rating } = req.body;
 
+    // error catch
     if (!songId || !title || !artist || rating === undefined) {
         return res.status(400).send({ error: 'Missing ranking data' });
     }
 
-    rankings.push({
+    // save ranking in mongo
+    await rankingCollection.insertOne({
         songId,
         title,
         artist,
         image,
         username: req.userEmail.toLowerCase(),
         rating,
+        createdAt: new Date(),
     });
 
+    // validate
     res.send({ success: true });
 });
 
@@ -150,7 +156,8 @@ app.post('/api/auth/login', async (req, res) => {
         return res.status(400).send({ error: 'Missing email or password' });
     }
 
-    const user = users.find((user) => user.email === email);
+    // find user in mongo
+const user = await userCollection.findOne({ email });
     if (!user) {
         return res.status(401).send({ error: 'Invalid credentials' });
     }
@@ -193,7 +200,13 @@ app.get('/api/auth/me', verifyAuth, (req, res) => {
     res.send({ email: req.userEmail });
 });
 
-app.get('/api/rankings', verifyAuth, (req, res) => {
+app.get('/api/rankings', verifyAuth, async (req, res) => {
+    // load this user rankings from mongo
+    const rankings = await rankingCollection
+        .find({ username: req.userEmail.toLowerCase() })
+        .sort({ createdAt: -1 })
+        .toArray();
+
     res.send(rankings);
 });
 
