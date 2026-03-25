@@ -201,7 +201,7 @@ app.get('/api/auth/me', verifyAuth, (req, res) => {
 });
 
 app.get('/api/rankings', verifyAuth, async (req, res) => {
-    // load this user rankings from mongo
+    // load user rankings from mongo
     const rankings = await rankingCollection
         .find({ username: req.userEmail.toLowerCase() })
         .sort({ createdAt: -1 })
