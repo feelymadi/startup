@@ -5,7 +5,18 @@ const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostna
 const client = new MongoClient(url);
 const db = client.db('tuneChart');
 const userCollection = db.collection('user');
-const scoreCollection = db.collection('score');
+const rankingCollection = db.collection('ranking');
+
+// catch for bad mongo connection
+(async function testConnection() {
+  try {
+    await db.command({ ping: 1 });
+    console.log('Connected to database');
+  } catch (ex) {
+    console.log(`Unable to connect to database because ${ex.message}`);
+    process.exit(1);
+  }
+})();
 
 
 const express = require('express');
@@ -18,8 +29,6 @@ const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 let chartSongs = [];
-let rankings = [];
-let users = [];
 let sessions = {};
 
 app.use(express.json());
@@ -111,7 +120,8 @@ app.post('/api/auth/create', async (req, res) => {
         return res.status(400).send({ error: 'Missing email or password' });
     }
 
-    const existingUser = users.find((user) => user.email === email);
+    // verify user
+    const existingUser = await userCollection.findOne({ email });
     if (existingUser) {
         return res.status(409).send({ error: 'User already exists' });
     }
@@ -123,7 +133,8 @@ app.post('/api/auth/create', async (req, res) => {
         passwordHash,
     };
 
-    users.push(newUser);
+    // add user
+    await userCollection.insertOne(newUser);
 
     const token = uuidv4();
     sessions[token] = email;
