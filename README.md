@@ -114,12 +114,18 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - I completed this part of the deliverable.
+      I created a backend service using Node.js and Express located in the service folder. This service runs on port 4000 locally and is deployed to my AWS server using PM2 for process management.
+- [x] **Static middleware for frontend** - I completed this part of the deliverable.
+      I configured Express to serve my React production build using express.static('public'). This allows my deployed backend service to host the frontend files directly.
+- [x] **Calls to third party endpoints** - I completed this part of the deliverable.
+      I integrated the iTunes Search API to allow users to search for real songs. My backend route /api/searchSongs fetches results from the iTunes API and sends simplified song data (title, artist, album art, preview link) to the frontend.
+- [x] **Backend service endpoints** - I completed this part of the deliverable.
+      I implemented several backend endpoints including /api/searchSongs for music search /api/rankings (POST + GET) for saving and retrieving user rankings /api/auth/create, /api/auth/login, /api/auth/logout, and /api/auth/me for authentication /api/chart for storing chart songs
+- [x] **Frontend calls service endpoints** - I completed this part of the deliverable.
+      My React pages call backend endpoints using fetch(). For example Rank page posts rankings to /api/rankings, Profile page loads user rankings from /api/rankings, Charts page aggregates rankings from /api/rankings, Login page calls /api/auth/login and /api/auth/create, All protected requests include credentials: 'include' to send the authentication cookie.
+- [x] **Supports registration, login, logout, and restricted endpoint** - I completed this part of the deliverable.
+      I implemented session-based authentication using cookies. Users can register and log in with hashed passwords using bcrypt. A session token is stored server-side and verified using middleware (verifyAuth) to restrict access to protected routes like /api/rankings. Logout removes the session and clears the cookie.
 
 ## 🚀 DB deliverable
 
