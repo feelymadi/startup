@@ -55,8 +55,8 @@ app.get('/api/hello', (req, res) => {
     res.send({ message: 'Hello from TuneChart backend!' });
 });
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+httpService.listen(port, () => {
+  console.log(`Listening on port ${port}`);
 });
 
 
