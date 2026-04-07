@@ -46,5 +46,3 @@ function broadcastEvent(event) {
 }
 
 module.exports = { peerProxy, broadcastEvent };
-
-module.exports = { peerProxy };
