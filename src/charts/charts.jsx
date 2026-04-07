@@ -54,9 +54,46 @@ export function Charts({ notifications }) {
   const topSong = rankedSongs[0] ?? null;
 
   // notification functionality and mock up
+
+  const [liveEvents, setLiveEvents] = useState([]);
+
+  useEffect(() => {
+    // connect wbsocket
+  const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+  const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+
+  socket.onopen = () => {
+    console.log('WebSocket connected');
+  };
+
+  socket.onmessage = (event) => {
+    const msg = JSON.parse(event.data);
+
+    // react to certain messege
+    if (msg.type === 'rating') {
+      const newMessage = `${msg.user} rated "${msg.title}" by ${msg.artist} ${msg.rating}`;
+
+      // only 10 most recent
+      setLiveEvents((prev) => [newMessage, ...prev.slice(0, 9)]);
+    }
+  };
+
+  socket.onclose = () => {
+    console.log('WebSocket disconnected');
+  };
+
+
+
+
+
+
   const [liveMocks, setLiveMocks] = useState([]);
   const mockUsers = ['Madi', 'Alex', 'Jo', 'Sam', 'Taylor'];
   const mockRatings = [3, 3.5, 4, 4.5, 5];
+
+
+
+
 
   // compile random notifications
   function generateRandomNotification() {
@@ -100,14 +137,20 @@ export function Charts({ notifications }) {
     <main className="container-fluid text-center min-vh-100 py-4">
       <div>
         {/* notification */}
+
         <div className="alert alert-info" role="alert">
-          <ul className="notification">
-            {displayNotifications.map(n => (
-              <li key={n.id} className="player-name">
-                {n.text} <span className="text-muted">({n.time})</span>
-              </li>
-            ))}
-          </ul>
+                  <div className="live-activity-section">
+  <h3>Live Activity</h3>
+  {liveEvents.length > 0 ? (
+    <ul>
+      {liveEvents.map((event, index) => (
+        <li key={index}>{event}</li>
+      ))}
+    </ul>
+  ) : (
+    <p>No live activity yet.</p>
+  )}
+</div>
         </div>
 
         <h1>Welcome to our Weekly Chart</h1>
