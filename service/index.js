@@ -4,6 +4,8 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const { v4: uuidv4 } = require('uuid');
+const http = require('http');
+const { peerProxy, broadcastEvent } = require('./peerProxy');
 
 // DB setup
 const { MongoClient } = require('mongodb');
@@ -28,6 +30,8 @@ const rankingCollection = db.collection('ranking');
 
 // server setup
 const app = express();
+const httpService = http.createServer(app);
+peerProxy(httpService);
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());
