@@ -140,8 +140,13 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [x] **Backend listens for WebSocket connection** - I completed this part of the deliverable.
+      I added peerProxy(httpService) in index.js, and created a WebSocketServer attached to the HTTP server.
+- [x] **Frontend makes WebSocket connection** - I completed this part of the deliverable.
+      Connections are made when someone submits a ranking.
+- [x] **Data sent over WebSocket connection** - I completed this part of the deliverable.
+      When a user submits a rating the backend pushes a WebSocket event out.
+- [x] **WebSocket data displayed** - I completed this part of the deliverable.
+      Updates are shown on Weekly Charts tab.
+- [x] **Application is fully functional** - I completed this part of the deliverable.
+      Everything is up and running as it should and all bugs have been fixed.
