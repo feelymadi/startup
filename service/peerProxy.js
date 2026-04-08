@@ -1,48 +1,52 @@
-// from simon
+// from simon (with additions)
 const { WebSocketServer, WebSocket } = require('ws');
+let socketServer;
 
 function peerProxy(httpServer) {
-  // Create a websocket object
-  const socketServer = new WebSocketServer({ server: httpServer });
+    // Create a websocket object
+    socketServer = new WebSocketServer({ server: httpServer });
 
-  socketServer.on('connection', (socket) => {
-    socket.isAlive = true;
+    socketServer.on('connection', (socket) => {
+        socket.isAlive = true;
 
-    // Forward messages to everyone except the sender
-    socket.on('message', function message(data) {
-      socketServer.clients.forEach((client) => {
-        if (client !== socket && client.readyState === WebSocket.OPEN) {
-          client.send(data);
-        }
-      });
+        // Forward messages to everyone except the sender
+        socket.on('message', function message(data) {
+            socketServer.clients.forEach((client) => {
+                if (client !== socket && client.readyState === WebSocket.OPEN) {
+                    client.send(data);
+                }
+            });
+        });
+
+        // Respond to pong messages by marking the connection alive
+        socket.on('pong', () => {
+            socket.isAlive = true;
+        });
     });
 
-    // Respond to pong messages by marking the connection alive
-    socket.on('pong', () => {
-      socket.isAlive = true;
-    });
-  });
+    // Periodically send out a ping message to make sure clients are alive
+    setInterval(() => {
+        socketServer.clients.forEach(function each(client) {
+            if (client.isAlive === false) return client.terminate();
 
-  // Periodically send out a ping message to make sure clients are alive
-  setInterval(() => {
-    socketServer.clients.forEach(function each(client) {
-      if (client.isAlive === false) return client.terminate();
-
-      client.isAlive = false;
-      client.ping();
-    });
-  }, 10000);
+            client.isAlive = false;
+            client.ping();
+        });
+    }, 10000);
 }
 
 // broadcast message (not from simon) 
 function broadcastEvent(event) {
-  const message = JSON.stringify(event);
-
-  socketServer.clients.forEach((client) => {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(message);
+    if (!socketServer) {
+        return;
     }
-  });
+    const message = JSON.stringify(event);
+
+    socketServer.clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN) {
+            client.send(message);
+        }
+    });
 }
 
 module.exports = { peerProxy, broadcastEvent };
