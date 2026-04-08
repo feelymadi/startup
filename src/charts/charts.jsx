@@ -58,7 +58,7 @@ export function Charts() {
   // top song
   const topSong = rankedSongs[0] ?? null;
 
-  // notification functionality and mock up
+  // live websocket notifications
   useEffect(() => {
     // connect wbsocket
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
