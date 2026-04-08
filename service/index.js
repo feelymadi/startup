@@ -19,13 +19,13 @@ const rankingCollection = db.collection('ranking');
 
 // catch for bad mongo connection
 (async function testConnection() {
-  try {
-    await db.command({ ping: 1 });
-    console.log('Connected to database');
-  } catch (ex) {
-    console.log(`Unable to connect to database because ${ex.message}`);
-    process.exit(1);
-  }
+    try {
+        await db.command({ ping: 1 });
+        console.log('Connected to database');
+    } catch (ex) {
+        console.log(`Unable to connect to database because ${ex.message}`);
+        process.exit(1);
+    }
 })();
 
 // server setup
@@ -56,7 +56,7 @@ app.get('/api/hello', (req, res) => {
 });
 
 httpService.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+    console.log(`Listening on port ${port}`);
 });
 
 
@@ -131,14 +131,24 @@ app.post('/api/rankings', verifyAuth, async (req, res) => {
         createdAt: new Date(),
     });
 
+    // notification
+    broadcastEvent({
+        type: 'rating',
+        user: req.userEmail.toLowerCase(),
+        title,
+        artist,
+        rating,
+    });
     // validate
     res.send({ success: true });
 });
 
+
 app.get('/api/rankings', verifyAuth, async (req, res) => {
     // load user rankings from mongo
+
     const rankings = await rankingCollection
-        .find({ username: req.userEmail.toLowerCase() })
+        .find({})
         .sort({ createdAt: -1 })
         .toArray();
 
@@ -184,7 +194,7 @@ app.post('/api/auth/login', async (req, res) => {
     }
 
     // find user in mongo
-const user = await userCollection.findOne({ email });
+    const user = await userCollection.findOne({ email });
     if (!user) {
         return res.status(401).send({ error: 'Invalid credentials' });
     }
