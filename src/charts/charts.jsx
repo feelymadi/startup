@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './charts.css';
 
-export function Charts({ notifications }) {
+export function Charts() {
+
+  // use state
+  const [rankings, setRankings] = useState([]);
+  const [liveEvents, setLiveEvents] = useState([]);
+
+
 
   // rankings 
-  const [rankings, setRankings] = useState([]);
 
   useEffect(() => {
     async function loadRankings() {
@@ -54,83 +59,34 @@ export function Charts({ notifications }) {
   const topSong = rankedSongs[0] ?? null;
 
   // notification functionality and mock up
-
-  const [liveEvents, setLiveEvents] = useState([]);
-
   useEffect(() => {
     // connect wbsocket
-  const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-  const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
 
-  socket.onopen = () => {
-    console.log('WebSocket connected');
-  };
-
-  socket.onmessage = (event) => {
-    const msg = JSON.parse(event.data);
-
-    // react to certain messege
-    if (msg.type === 'rating') {
-      const newMessage = `${msg.user} rated "${msg.title}" by ${msg.artist} ${msg.rating}`;
-
-      // only 10 most recent
-      setLiveEvents((prev) => [newMessage, ...prev.slice(0, 9)]);
-    }
-  };
-
-  socket.onclose = () => {
-    console.log('WebSocket disconnected');
-  };
-
-
-
-
-
-
-  const [liveMocks, setLiveMocks] = useState([]);
-  const mockUsers = ['Madi', 'Alex', 'Jo', 'Sam', 'Taylor'];
-  const mockRatings = [3, 3.5, 4, 4.5, 5];
-
-
-
-
-
-  // compile random notifications
-  function generateRandomNotification() {
-    if (rankedSongs.length === 0) {
-      return {
-        id: crypto.randomUUID(),
-        text: 'No song activity yet',
-        time: new Date().toLocaleTimeString(),
-      };
-    }
-
-    const randomUser = mockUsers[Math.floor(Math.random() * mockUsers.length)];
-    const randomSong = rankedSongs[Math.floor(Math.random() * rankedSongs.length)];
-    const randomRating = mockRatings[Math.floor(Math.random() * mockRatings.length)];
-
-    return {
-      id: crypto.randomUUID(),
-      text: `${randomUser} rated "${randomSong?.title}" (${randomRating})`,
-      time: new Date().toLocaleTimeString(),
+    socket.onopen = () => {
+      console.log('WebSocket connected');
     };
-  }
 
-  // interval for noficiation usinf use effect
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setLiveMocks(prev => [
-        generateRandomNotification(),
-        ...prev
-      ].slice(0, 5));
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [rankings.length]);
+    socket.onmessage = (event) => {
+      const msg = JSON.parse(event.data);
 
-  const displayNotifications =
-    (notifications?.length ?? 0) > 0
-      ? notifications
-      : liveMocks;
+      // react to certain messege
+      if (msg.type === 'rating') {
+        const newMessage = `${msg.user} rated "${msg.title}" by ${msg.artist} ${msg.rating}`;
+
+        // only 10 most recent
+        setLiveEvents((prev) => [newMessage, ...prev.slice(0, 9)]);
+      }
+    };
+
+    socket.onclose = () => {
+      console.log('WebSocket disconnected');
+    };
+
+    return () => socket.close();
+  }, []);
+
 
 
   return (
@@ -139,18 +95,16 @@ export function Charts({ notifications }) {
         {/* notification */}
 
         <div className="alert alert-info" role="alert">
-                  <div className="live-activity-section">
-  <h3>Live Activity</h3>
-  {liveEvents.length > 0 ? (
-    <ul>
-      {liveEvents.map((event, index) => (
-        <li key={index}>{event}</li>
-      ))}
-    </ul>
-  ) : (
-    <p>No live activity yet.</p>
-  )}
-</div>
+          <h3>Live Activity</h3>
+          {liveEvents.length > 0 ? (
+            <ul>
+              {liveEvents.map((event, index) => (
+                <li key={index}>{event}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No live activity yet.</p>
+          )}
         </div>
 
         <h1>Welcome to our Weekly Chart</h1>
